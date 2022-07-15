@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)https://ametice.univ-amu.fr/mod/page/view.php?id=1224313 -->
+<html dir="ltr" lang="fr" xml:lang="fr" class="yui3-js-enabled"><link type="text/css" rel="stylesheet" id="dark-mode-general-link"><link type="text/css" rel="stylesheet" id="dark-mode-custom-link"><style type="text/css" id="dark-mode-custom-style"></style><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>[19-20]-S3-M3103-Algo. avancée: TP 03&amp;04 - Les arbres binaires de recherche</title>
+    <link rel="icon" href="https://ametice.univ-amu.fr/pluginfile.php/1/theme_adaptable/favicon/1595724422/favicon.ico">
+
+
+<meta name="keywords" content="moodle, [19-20]-S3-M3103-Algo. avancée: TP 03&amp;04 - Les arbres binaires de recherche">
+<link rel="stylesheet" type="text/css" href="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/combo"><script charset="utf-8" id="yui_3_17_2_1_1595777871523_8" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/combo(1)" async=""></script><link charset="utf-8" rel="stylesheet" id="yui_3_17_2_1_1595777871523_19" href="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/combo(2)"><script charset="utf-8" id="yui_3_17_2_1_1595777871523_20" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/combo(3)" async=""></script><script charset="utf-8" id="yui_3_17_2_1_1595777871523_47" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/combo(4)" async=""></script><script id="firstthemesheet" type="text/css">/** Required in order to fix style inclusion problems in IE with YUI **/</script><link rel="stylesheet" type="text/css" href="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/styles.php">
+<script>
+//<![CDATA[
+var M = {}; M.yui = {};
+M.pageloadstarttime = new Date();
+M.cfg = {"wwwroot":"https:\/\/ametice.univ-amu.fr","sesskey":"LMMjWDYOhv","sessiontimeout":"14400","themerev":"1595724422","slasharguments":1,"theme":"adaptable","iconsystemmodule":"core\/icon_system_fontawesome","jsrev":"1595724422","admin":"admin","svgicons":true,"usertimezone":"Europe\/Berlin","contextid":3239597,"langrev":1595729069,"templaterev":"1595724422"};var yui1ConfigFn = function(me) {if(/-skin|reset|fonts|grids|base/.test(me.name)){me.type='css';me.path=me.path.replace(/\.js/,'.css');me.path=me.path.replace(/\/yui2-skin/,'/assets/skins/sam/yui2-skin')}};
+var yui2ConfigFn = function(me) {var parts=me.name.replace(/^moodle-/,'').split('-'),component=parts.shift(),module=parts[0],min='-min';if(/-(skin|core)$/.test(me.name)){parts.pop();me.type='css';min=''}
+if(module){var filename=parts.join('-');me.path=component+'/'+module+'/'+filename+min+'.'+me.type}else{me.path=component+'/'+component+'.'+me.type}};
+YUI_config = {"debug":false,"base":"https:\/\/ametice.univ-amu.fr\/lib\/yuilib\/3.17.2\/","comboBase":"https:\/\/ametice.univ-amu.fr\/theme\/yui_combo.php?","combine":true,"filter":null,"insertBefore":"firstthemesheet","groups":{"yui2":{"base":"https:\/\/ametice.univ-amu.fr\/lib\/yuilib\/2in3\/2.9.0\/build\/","comboBase":"https:\/\/ametice.univ-amu.fr\/theme\/yui_combo.php?","combine":true,"ext":false,"root":"2in3\/2.9.0\/build\/","patterns":{"yui2-":{"group":"yui2","configFn":yui1ConfigFn}}},"moodle":{"name":"moodle","base":"https:\/\/ametice.univ-amu.fr\/theme\/yui_combo.php?m\/1595724422\/","combine":true,"comboBase":"https:\/\/ametice.univ-amu.fr\/theme\/yui_combo.php?","ext":false,"root":"m\/1595724422\/","patterns":{"moodle-":{"group":"moodle","configFn":yui2ConfigFn}},"filter":null,"modules":{"moodle-core-blocks":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification"]},"moodle-core-tooltip":{"requires":["base","node","io-base","moodle-core-notification-dialogue","json-parse","widget-position","widget-position-align","event-outside","cache-base"]},"moodle-core-handlebars":{"condition":{"trigger":"handlebars","when":"after"}},"moodle-core-languninstallconfirm":{"requires":["base","node","moodle-core-notification-confirm","moodle-core-notification-alert"]},"moodle-core-lockscroll":{"requires":["plugin","base-build"]},"moodle-core-formchangechecker":{"requires":["base","event-focus","moodle-core-event"]},"moodle-core-dragdrop":{"requires":["base","node","io","dom","dd","event-key","event-focus","moodle-core-notification"]},"moodle-core-chooserdialogue":{"requires":["base","panel","moodle-core-notification"]},"moodle-core-actionmenu":{"requires":["base","event","node-event-simulate"]},"moodle-core-maintenancemodetimer":{"requires":["base","node"]},"moodle-core-notification":{"requires":["moodle-core-notification-dialogue","moodle-core-notification-alert","moodle-core-notification-confirm","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-core-notification-dialogue":{"requires":["base","node","panel","escape","event-key","dd-plugin","moodle-core-widget-focusafterclose","moodle-core-lockscroll"]},"moodle-core-notification-alert":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-confirm":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-exception":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-ajaxexception":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-event":{"requires":["event-custom"]},"moodle-core-popuphelp":{"requires":["moodle-core-tooltip"]},"moodle-core_availability-form":{"requires":["base","node","event","event-delegate","panel","moodle-core-notification-dialogue","json"]},"moodle-backup-backupselectall":{"requires":["node","event","node-event-simulate","anim"]},"moodle-backup-confirmcancel":{"requires":["node","node-event-simulate","moodle-core-notification-confirm"]},"moodle-course-categoryexpander":{"requires":["node","event-key"]},"moodle-course-management":{"requires":["base","node","io-base","moodle-core-notification-exception","json-parse","dd-constrain","dd-proxy","dd-drop","dd-delegate","node-event-delegate"]},"moodle-course-dragdrop":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification","moodle-course-coursebase","moodle-course-util"]},"moodle-course-util":{"requires":["node"],"use":["moodle-course-util-base"],"submodules":{"moodle-course-util-base":{},"moodle-course-util-section":{"requires":["node","moodle-course-util-base"]},"moodle-course-util-cm":{"requires":["node","moodle-course-util-base"]}}},"moodle-course-formatchooser":{"requires":["base","node","node-event-simulate"]},"moodle-form-shortforms":{"requires":["node","base","selector-css3","moodle-core-event"]},"moodle-form-passwordunmask":{"requires":[]},"moodle-form-dateselector":{"requires":["base","node","overlay","calendar"]},"moodle-question-preview":{"requires":["base","dom","event-delegate","event-key","core_question_engine"]},"moodle-question-searchform":{"requires":["base","node"]},"moodle-question-chooser":{"requires":["moodle-core-chooserdialogue"]},"moodle-availability_completion-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_date-form":{"requires":["base","node","event","io","moodle-core_availability-form"]},"moodle-availability_grade-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_group-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_grouping-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_language-form":{"requires":["base","node","event","node-event-simulate","moodle-core_availability-form"]},"moodle-availability_profile-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-qtype_musictheory-musictheorykeyboardui":{"requires":["base","node","datatype"]},"moodle-qtype_musictheory-musictheoryqtype":{"requires":["base","node","datatype","node-event-simulate"]},"moodle-qtype_musictheory-musictheoryui":{"requires":["base","node","datatype","panel","dd-plugin"]},"moodle-mod_assign-history":{"requires":["node","transition"]},"moodle-mod_attendance-groupfilter":{"requires":["base","node"]},"moodle-mod_bigbluebuttonbn-modform":{"requires":["base","node"]},"moodle-mod_bigbluebuttonbn-broker":{"requires":["base","node","datasource-get","datasource-jsonschema","datasource-polling","moodle-core-notification"]},"moodle-mod_bigbluebuttonbn-recordings":{"requires":["base","node","datasource-get","datasource-jsonschema","datasource-polling","moodle-core-notification"]},"moodle-mod_bigbluebuttonbn-rooms":{"requires":["base","node","datasource-get","datasource-jsonschema","datasource-polling","moodle-core-notification"]},"moodle-mod_bigbluebuttonbn-imports":{"requires":["base","node"]},"moodle-mod_checklist-linkselect":{"requires":["node","event-valuechange"]},"moodle-mod_offlinequiz-toolboxes":{"requires":["base","node","event","event-key","io","moodle-mod_offlinequiz-offlinequizbase","moodle-mod_offlinequiz-util-slot","moodle-core-notification-ajaxexception"]},"moodle-mod_offlinequiz-randomquestion":{"requires":["base","event","node","io","moodle-core-notification-dialogue"]},"moodle-mod_offlinequiz-offlinequizquestionbank":{"requires":["base","event","node","io","io-form","yui-later","moodle-question-qbankmanager","moodle-question-chooser","moodle-question-searchform","moodle-core-notification"]},"moodle-mod_offlinequiz-autosave":{"requires":["base","node","event","event-valuechange","node-event-delegate","io-form"]},"moodle-mod_offlinequiz-modform":{"requires":["base","node","event"]},"moodle-mod_offlinequiz-dragdrop":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification","moodle-mod_offlinequiz-offlinequizbase","moodle-mod_offlinequiz-util-base","moodle-mod_offlinequiz-util-page","moodle-mod_offlinequiz-util-slot","moodle-course-util"]},"moodle-mod_offlinequiz-questionchooser":{"requires":["moodle-core-chooserdialogue","moodle-mod_offlinequiz-util","querystring-parse"]},"moodle-mod_offlinequiz-offlinequizbase":{"requires":["base","node"]},"moodle-mod_offlinequiz-util":{"requires":["node"],"use":["moodle-mod_offlinequiz-util-base"],"submodules":{"moodle-mod_offlinequiz-util-base":{},"moodle-mod_offlinequiz-util-slot":{"requires":["node","moodle-mod_offlinequiz-util-base"]},"moodle-mod_offlinequiz-util-page":{"requires":["node","moodle-mod_offlinequiz-util-base"]}}},"moodle-mod_offlinequiz-repaginate":{"requires":["base","event","node","io","moodle-core-notification-dialogue"]},"moodle-mod_quiz-toolboxes":{"requires":["base","node","event","event-key","io","moodle-mod_quiz-quizbase","moodle-mod_quiz-util-slot","moodle-core-notification-ajaxexception"]},"moodle-mod_quiz-quizbase":{"requires":["base","node"]},"moodle-mod_quiz-autosave":{"requires":["base","node","event","event-valuechange","node-event-delegate","io-form"]},"moodle-mod_quiz-modform":{"requires":["base","node","event"]},"moodle-mod_quiz-dragdrop":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification","moodle-mod_quiz-quizbase","moodle-mod_quiz-util-base","moodle-mod_quiz-util-page","moodle-mod_quiz-util-slot","moodle-course-util"]},"moodle-mod_quiz-questionchooser":{"requires":["moodle-core-chooserdialogue","moodle-mod_quiz-util","querystring-parse"]},"moodle-mod_quiz-util":{"requires":["node","moodle-core-actionmenu"],"use":["moodle-mod_quiz-util-base"],"submodules":{"moodle-mod_quiz-util-base":{},"moodle-mod_quiz-util-slot":{"requires":["node","moodle-mod_quiz-util-base"]},"moodle-mod_quiz-util-page":{"requires":["node","moodle-mod_quiz-util-base"]}}},"moodle-mod_scheduler-delselected":{"requires":["base","node","event"]},"moodle-mod_scheduler-saveseen":{"requires":["base","node","event"]},"moodle-mod_scheduler-studentlist":{"requires":["base","node","event","io"]},"moodle-message_airnotifier-toolboxes":{"requires":["base","node","io"]},"moodle-filter_glossary-autolinker":{"requires":["base","node","io-base","json-parse","event-delegate","overlay","moodle-core-event","moodle-core-notification-alert","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-filter_mathjaxloader-loader":{"requires":["moodle-core-event"]},"moodle-editor_atto-editor":{"requires":["node","transition","io","overlay","escape","event","event-simulate","event-custom","node-event-html5","node-event-simulate","yui-throttle","moodle-core-notification-dialogue","moodle-core-notification-confirm","moodle-editor_atto-rangy","handlebars","timers","querystring-stringify"]},"moodle-editor_atto-plugin":{"requires":["node","base","escape","event","event-outside","handlebars","event-custom","timers","moodle-editor_atto-menu"]},"moodle-editor_atto-menu":{"requires":["moodle-core-notification-dialogue","node","event","event-custom"]},"moodle-editor_atto-rangy":{"requires":[]},"moodle-format_grid-gridkeys":{"requires":["event-nav-keys"]},"moodle-report_eventlist-eventfilter":{"requires":["base","event","node","node-event-delegate","datatable","autocomplete","autocomplete-filters"]},"moodle-report_loglive-fetchlogs":{"requires":["base","event","node","io","node-event-delegate"]},"moodle-gradereport_grader-gradereporttable":{"requires":["base","node","event","handlebars","overlay","event-hover"]},"moodle-gradereport_history-userselector":{"requires":["escape","event-delegate","event-key","handlebars","io-base","json-parse","moodle-core-notification-dialogue"]},"moodle-tool_capability-search":{"requires":["base","node"]},"moodle-tool_lp-dragdrop-reorder":{"requires":["moodle-core-dragdrop"]},"moodle-tool_monitor-dropdown":{"requires":["base","event","node"]},"moodle-assignfeedback_editpdf-editor":{"requires":["base","event","node","io","graphics","json","event-move","event-resize","transition","querystring-stringify-simple","moodle-core-notification-dialog","moodle-core-notification-alert","moodle-core-notification-warning","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-atto_accessibilitychecker-button":{"requires":["color-base","moodle-editor_atto-plugin"]},"moodle-atto_accessibilityhelper-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_align-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_bold-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_charmap-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_clear-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_collapse-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_emojipicker-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_emoticon-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_equation-button":{"requires":["moodle-editor_atto-plugin","moodle-core-event","io","event-valuechange","tabview","array-extras"]},"moodle-atto_h5p-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_html-beautify":{},"moodle-atto_html-button":{"requires":["promise","moodle-editor_atto-plugin","moodle-atto_html-beautify","moodle-atto_html-codemirror","event-valuechange"]},"moodle-atto_html-codemirror":{"requires":["moodle-atto_html-codemirror-skin"]},"moodle-atto_image-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_indent-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_italic-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_link-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_managefiles-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_managefiles-usedfiles":{"requires":["node","escape"]},"moodle-atto_media-button":{"requires":["moodle-editor_atto-plugin","moodle-form-shortforms"]},"moodle-atto_noautolink-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_orderedlist-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_poodll-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_recordrtc-button":{"requires":["moodle-editor_atto-plugin","moodle-atto_recordrtc-recording"]},"moodle-atto_recordrtc-recording":{"requires":["moodle-atto_recordrtc-button"]},"moodle-atto_rtl-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_strike-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_subscript-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_superscript-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_table-button":{"requires":["moodle-editor_atto-plugin","moodle-editor_atto-menu","event","event-valuechange"]},"moodle-atto_title-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_underline-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_undo-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_unorderedlist-button":{"requires":["moodle-editor_atto-plugin"]}}},"gallery":{"name":"gallery","base":"https:\/\/ametice.univ-amu.fr\/lib\/yuilib\/gallery\/","combine":true,"comboBase":"https:\/\/ametice.univ-amu.fr\/theme\/yui_combo.php?","ext":false,"root":"gallery\/1595724422\/","patterns":{"gallery-":{"group":"gallery"}}}},"modules":{"core_filepicker":{"name":"core_filepicker","fullpath":"https:\/\/ametice.univ-amu.fr\/lib\/javascript.php\/1595724422\/repository\/filepicker.js","requires":["base","node","node-event-simulate","json","async-queue","io-base","io-upload-iframe","io-form","yui2-treeview","panel","cookie","datatable","datatable-sort","resize-plugin","dd-plugin","escape","moodle-core_filepicker","moodle-core-notification-dialogue"]},"core_comment":{"name":"core_comment","fullpath":"https:\/\/ametice.univ-amu.fr\/lib\/javascript.php\/1595724422\/comment\/comment.js","requires":["base","io-base","node","json","yui2-animation","overlay","escape"]},"mathjax":{"name":"mathjax","fullpath":"https:\/\/cdn.jsdelivr.net\/npm\/mathjax@2.7.8\/MathJax.js?delayStartupUntil=configured"}}};
+M.yui.loader = {modules: {}};
+
+//]]>
+</script>
+    <!-- CSS print media -->
+    <link rel="stylesheet" type="text/css" href="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/print.css" media="print">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" value="summary">
+    <meta name="twitter:site" value="AMeTICE - Enseigner et apprendre avec le numérique">
+    <meta name="twitter:title" value="[19-20]-S3-M3103-Algo. avancée: TP 03&amp;04 - Les arbres binaires de recherche">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="[19-20]-S3-M3103-Algo. avancée: TP 03&amp;04 - Les arbres binaires de recherche">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ametice.univ-amu.fr">
+    <meta name="og:site_name" value="AMeTICE - Enseigner et apprendre avec le numérique">
+
+    <!-- Chrome, Firefox OS and Opera on Android topbar color -->
+    <meta name="theme-color" content="#fbba00">
+
+    <!-- Windows Phone topbar color -->
+    <meta name="msapplication-navbutton-color" content="#fbba00">
+
+    <!-- iOS Safari topbar color -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#fbba00">
+
+        <!-- Load Google Fonts -->
+    <link href="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/css" rel="stylesheet" type="text/css">
+    
+            <link href="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/css" rel="stylesheet" type="text/css">
+    
+            <link href="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/css(1)" rel="stylesheet" type="text/css">
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    config: ["Accessible.js", "Safe.js"],
+    errorSettings: { message: ["!"] },
+    skipStartupTypeset: true,
+    messageStyle: "none"
+});
+</script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="core/first" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/requirejs.php"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="core/event" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/requirejs(1).php"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/javascript.php"></script></head>
+
+<body id="page-mod-page-view" class="format-topics path-mod path-mod-page chrome dir-ltr lang-fr yui-skin-sam yui3-skin-sam ametice-univ-amu-fr pagelayout-incourse course-52174 context-3239597 cmid-1224313 category-2904 two-column header-style1 has-page-header nomobilenavigation jsenabled page-header-margin drawer-ease pace-done"><div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div>
+
+<div>
+    <a class="sr-only sr-only-focusable" href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#maincontent">Passer au contenu principal</a>
+</div><script src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/javascript(1).php"></script>
+<script src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/javascript(2).php"></script>
+<script src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/combo(5)"></script><div id="yui3-css-stamp" style="position: absolute !important; visibility: hidden !important" class=""></div><script src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/jquery-3.4.1.min.js"></script>
+<script src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/pace-min.js"></script>
+<script src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/jquery-flexslider-min.js"></script>
+<script src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/tickerme.js"></script>
+<script src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/jquery-easing-min.js"></script>
+<script src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/adaptable_v2_1_1_2.js"></script>
+<script src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/javascript(3).php"></script>
+<script>
+//<![CDATA[
+document.body.className += ' jsenabled';
+//]]>
+</script>
+
+
+<div id="page" class="container-fluid fullin showblockicons standard">
+
+
+
+
+    <header id="adaptable-page-header-wrapper" class="fixed-top">
+
+    <div id="above-header" class="mb-2 mb-lg-3">
+        <div class="container">
+            <nav class="navbar navbar-expand btco-hover-menu">
+
+                                <div id="adaptable-page-header-nav-drawer" data-region="drawer-toggle" class="d-lg-none mr-3">
+                    <button id="drawer" aria-expanded="false" aria-controls="nav-drawer" type="button" class="nav-link float-sm-left mr-1" data-side="left">
+                        <i class="fa fa-bars fa-fw " aria-hidden="true"></i>
+                        <span class="sr-only">Panneau latéral</span>
+                    </button>
+                </div>
+                
+                <div class="collapse navbar-collapse">
+                <div class="my-auto m-1"></div>
+                    <ul class="navbar-nav ml-auto my-auto">
+
+                        <div class="pull-left">
+                            <ul class="navbar-nav mr-auto"></ul>                        </div>
+
+                        
+                                                <li class="nav-item d-xs-block d-sm-block d-md-none my-auto mx-md-1 my-auto">
+                            <a class="nav-link" href="https://ametice.univ-amu.fr/course/search.php">
+                                <i class="icon fa fa-search fa-fw " title="Search" aria-label="Search"></i>
+                            </a>
+                        </li>
+
+                        <div class="my-auto mx-md-1"><div class="popover-region collapsed popover-region-notifications" id="nav-notification-popover-container" data-userid="2642013" data-region="popover-region">
+    <div class="popover-region-toggle nav-link" data-region="popover-region-toggle" role="button" aria-controls="popover-region-container-5f1da34e6706e5f1da34e6197315" aria-haspopup="true" aria-label="Afficher la fenêtre des notifications sans nouvelle notification" tabindex="0">
+                <i class="icon fa fa-bell fa-fw " title="Ouvrir/fermer le menu notifications" aria-label="Ouvrir/fermer le menu notifications"></i>
+        <div class="count-container hidden" data-region="count-container" aria-label="Il y a 0 notifications non lues">0</div>
+
+    </div>
+    <div id="popover-region-container-5f1da34e6706e5f1da34e6197315" class="popover-region-container" data-region="popover-region-container" aria-expanded="false" aria-hidden="true" aria-label="Fenêtre de notification" role="region">
+        <div class="popover-region-header-container">
+            <h3 class="popover-region-header-text" data-region="popover-region-header-text">Notifications</h3>
+            <div class="popover-region-header-actions" data-region="popover-region-header-actions">        <a class="mark-all-read-button" href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#" title="Tout marquer comme lu" data-action="mark-all-read" role="button" aria-label="Tout marquer comme lu">
+            <span class="normal-icon"><i class="icon fa fa-check fa-fw " aria-hidden="true"></i></span>
+            <span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+        </a>
+        <a href="https://ametice.univ-amu.fr/message/notificationpreferences.php?userid=2642013" title="Préférences de notification" aria-label="Préférences de notification">
+            <i class="icon fa fa-cog fa-fw " aria-hidden="true"></i>
+        </a>
+</div>
+        </div>
+        <div class="popover-region-content-container" data-region="popover-region-content-container">
+            <div class="popover-region-content" data-region="popover-region-content">
+                        <div class="all-notifications" data-region="all-notifications" role="log" aria-busy="false" aria-atomic="false" aria-relevant="additions"></div>
+        <div class="empty-message" tabindex="0" data-region="empty-message">Vous n'avez pas de notification</div>
+
+            </div>
+            <span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+        </div>
+                <a class="see-all-link" href="https://ametice.univ-amu.fr/message/output/popup/notifications.php">
+                    <div class="popover-region-footer-container">
+                        <div class="popover-region-seeall-text">Tout afficher</div>
+                    </div>
+                </a>
+    </div>
+</div><div class="popover-region collapsed" data-region="popover-region-messages">
+    <a id="message-drawer-toggle-5f1da34e67cd55f1da34e6197316" class="nav-link d-inline-block popover-region-toggle position-relative" href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#" role="button">
+        <i class="icon fa fa-comment fa-fw " title="Ouvrir/fermer le tiroir des messages" aria-label="Ouvrir/fermer le tiroir des messages"></i>
+        <div class="count-container hidden" data-region="count-container" aria-label="Il y a 0 conversations non lues">0</div>
+    </a>
+    <span class="sr-only sr-only-focusable" data-region="jumpto" tabindex="-1"></span></div></div><li class="nav-item dropdown ml-2 my-auto"></li>
+                            <li class="nav-item dropdown ml-3 ml-md-4 mr-2 mr-md-0">
+                                <a class="nav-link dropdown-toggle my-auto" role="button" href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#" id="usermenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-controls="usermenu-dropdown" aria-label="Menu utilisateur" title="Matthieu TRINQUART">
+        <span class="d-none d-md-inline-block mx-1">Matthieu TRINQUART</span>
+    <img src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/f1.png" class="userpicture defaultuserpic" width="50" height="50" aria-hidden="true">
+</a>
+
+<div class="dropdown-menu dropdown-menu-right" role="menu" id="usermenu-dropdown" aria-labelledby="usermenu">
+    <a class="dropdown-item" href="https://ametice.univ-amu.fr/user/profile.php" title="Consulter le profil"><i class="fa fa-user"></i>Consulter le profil</a><a class="dropdown-item" href="https://ametice.univ-amu.fr/user/edit.php" title="Modifier le profil"><i class="fa fa-cog"></i>Modifier le profil</a><a class="dropdown-item" href="https://ametice.univ-amu.fr/user/files.php" title="Fichiers personnels"><i class="fa fa-file"></i>Fichiers personnels</a><a class="dropdown-item" href="https://ametice.univ-amu.fr/grade/report/overview/index.php" title="Notes"><i class="fa fa-list-alt"></i>Notes</a><a class="dropdown-item" href="https://ametice.univ-amu.fr/user/preferences.php" title="Préférences"><i class="fa fa-cog"></i>Préférences</a><a class="dropdown-item" href="https://ametice.univ-amu.fr/calendar/view.php" title="Calendrier"><i class="fa fa-calendar"></i>Calendrier</a><a class="dropdown-item" href="https://ametice.univ-amu.fr/login/logout.php?sesskey=LMMjWDYOhv" title="Déconnexion"><i class="fa fa-sign-out"></i>Déconnexion</a>
+</div>                            </li>
+
+                        
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div id="page-header" class="container d-none d-lg-block">
+        <div class="row">
+
+        <div class="col-lg-4">
+        <div class="d-flex align-items-start bd-highlight"><div class="p-2 bd-highlight d-none d-lg-block"><a href="https://ametice.univ-amu.fr/" aria-label="home" title="AMeTICE - Enseigner et apprendre avec le numérique"><img src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/logo_iut.png" id="logo" alt=""></a></div><div id="sitetitle" class="p-2 bd-highlight d-none d-lg-block"><h1>[19-20]-S3-M3103- Algorithmique avancée (Brett Des ...</h1></div></div>        </div>
+
+        <div class="col-lg-8 p-0 my-auto">
+            
+                                    <div class="searchbox d-none d-lg-block">
+                        <form action="https://ametice.univ-amu.fr/course/search.php">
+                            <label class="hidden" for="search-1" style="display: none;">Rechercher des cours                            </label>
+                            <div class="search-box grey-box bg-white clear-fix">
+                                <input placeholder="Rechercher un cours" accesskey="6" class="search_tour bg-white no-border left search-box__input ui-autocomplete-input" type="text" name="search" id="search-1" autocomplete="off">
+                                        <button title="Rechercher un cours" type="submit" class="no-border bg-white pas search-box__button">
+                                                <abbr class="fa fa-search" title="Rechercher un cours">
+                                                </abbr>
+                                        </button>
+                            </div>
+                        </form>
+                    </div>
+                
+                <div id="course-header">
+                                    </div>
+
+            </div>
+            </div>
+
+    </div>
+
+
+
+
+
+<div id="nav-drawer" data-region="drawer" class="d-print-none moodle-has-zindex closed" aria-hidden="true" tabindex="-1">
+    <div id="nav-drawer-inner">
+        <nav class="list-group">
+            <ul class="list-unstyled components">
+
+                <a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/?redirect=0" data-key="" data-isexpandable="0" data-indent="0" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer"><div class="m-l-0"><i class="fa fa-home fa-lg"></i> Accueil</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/my/index.php" data-key="" data-isexpandable="0" data-indent="0" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer"><div class="m-l-0"><i class="fa fa-dashboard fa-lg"></i>  Tableau de bord</div></a><a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#main-navigation-drawer1" class="list-group-item dropdown-toggle" aria-haspopup="true" data-target="#" data-toggle="collapse" title=""><i class="fa fa-briefcase fa-lg"></i> Mes cours</a><ul class="collapse" id="main-navigation-drawer1"><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=57005" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">Enquête enseignement à distance</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=49244" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[19-20]-M2105</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=37794" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[18-19]-S1-M1102 - Algo. / Prog.</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=37845" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[18-19]-M1103 SdD</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=37809" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[18-19]-S1_M1104 intro aux BDD</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=37593" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[18-19]-M2103-POO</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=38053" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[18-19]-S2-M2201-Graphes et langa...</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=37993" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[18-19]-M1202 - Algèbre linéaire</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=33065" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[18-19]-S2 - M2106 Prog&amp;Admin</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=37985" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[18-19]- S1 - M1201</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=54724" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[19-20]-M4204-Anglais</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=54129" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[19-20]-M4104Cip</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=54086" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[19-20]-S4-M4105- Moteurs 3D</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=53483" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[19-20]-Prog Rep</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=53416" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[19-20]-S4-M4202Cin- CCIN</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=53415" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[19-20]-M4102Cin - Synthèse d'Ima...</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=52913" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[19-20]-M4105Cip</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=52912" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[19-20]-M4103Cip</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=52711" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[19-20]-S4-M4202Cip</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=52174" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer1"><div class=" m-l-1">[19-20]-S3-M3103-Algo. avancée</div></a></ul><a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#main-navigation-drawer2" class="list-group-item dropdown-toggle" aria-haspopup="true" data-target="#" data-toggle="collapse" title=""><i class="fa fa-sitemap fa-lg"></i><span class="menutitle">Cours actuel</span></a><ul class="collapse" id="main-navigation-drawer2"><a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#main-navigation-drawer23" class="list-group-item dropdown-toggle" aria-haspopup="true" data-target="#" data-toggle="collapse" title=""><i class="icon fa fa-list-ol fa-lg"></i>Sections</a><ul class="collapse" id="main-navigation-drawer23"><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=52174#section-0" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer23"><div class=" m-l-1">Généralités</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=52174#section-1" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer23"><div class=" m-l-1">Les tables de hachage</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=52174#section-2" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer23"><div class=" m-l-1">Les Arbres</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=52174#section-3" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer23"><div class=" m-l-1">Les Tas</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=52174#section-4" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer23"><div class=" m-l-1">Projets</div></a></ul><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/user/index.php?id=52174" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer3"><div class=" m-l-1"><i class="icon fa fa-users fa-lg"></i>Participants</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/grade/report/index.php?id=52174" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer3"><div class=" m-l-1"><i class="icon fa fa-table fa-fw icon" aria-hidden="true"></i>Notes</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/mod/assign/index.php?id=52174" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer3"><div class=" m-l-1"><img class="icon icon" alt="" aria-hidden="true" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/icon.svg">Devoirs</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/resources.php?id=52174" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="main-navigation-drawer3"><div class=" m-l-1"><img class="icon icon" alt="" aria-hidden="true" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/icon(1).svg">Ressources</div></a></ul><a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#custom-menu-drawer4" class="list-group-item dropdown-toggle" aria-haspopup="true" data-target="#" data-toggle="collapse"><span class="fa fa-address-card-o"></span> efoliAM</a><ul class="collapse" id="custom-menu-drawer4"><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=9133" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="custom-menu-drawer4"><div class=" m-l-1"> Qu'est-ce qu'efoliAM ?</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/auth/mnet/jump.php?hostid=4" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="custom-menu-drawer4"><div class=" m-l-1"> Accès à efoliAM</div></a></ul><a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#tools-menu-drawer5" class="list-group-item dropdown-toggle" aria-haspopup="true" data-target="#" data-toggle="collapse" title="Étudiants"><i class="fa fa-wrench fa-lg"></i><span class="menutitle">Étudiants</span></a><ul class="collapse" id="tools-menu-drawer5"><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=35068" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="tools-menu-drawer5"><div class=" m-l-1"><span class="fa fa-bullseye"></span> Aides aux outils numériques</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/index.php?categoryid=3210" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="tools-menu-drawer5"><div class=" m-l-1"><span class="fa fa-bullseye"></span> Practicéa : accompagnement nouveaux étudiants</div></a><a class="list-group-item list-group-item-action" href="https://ident.univ-amu.fr/cas/login?service=https%3A%2F%2Fent.univ-amu.fr%2Fesup-helpdesk%2Fstylesheets%2Fcas.faces%3Fargs%3Dpage%253daddTicket%2526categoryId%253d646" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="tools-menu-drawer5"><div class=" m-l-1"><span class="fa fa-question-circle"></span> Assistance</div></a></ul><a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#tools-menu-drawer6" class="list-group-item dropdown-toggle" aria-haspopup="true" data-target="#" data-toggle="collapse" title="Enseignants"><i class="fa fa-wrench fa-lg"></i><span class="menutitle">Enseignants</span></a><ul class="collapse" id="tools-menu-drawer6"><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=12036" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="tools-menu-drawer6"><div class=" m-l-1"><span class="fa fa-bullseye"></span> Aide AMeTICE</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=56164" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="tools-menu-drawer6"><div class=" m-l-1"><span class="fa fa-bullseye"></span> Aide Test AMeTICE</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/index.php?categoryid=1254" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="tools-menu-drawer6"><div class=" m-l-1"><span class="fa fa-search"></span> Créer un cours</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/index.php?categoryid=1253" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="tools-menu-drawer6"><div class=" m-l-1"><span class="fa fa-hand-o-right"></span> Expérimenter sur AMeTICE</div></a><a class="list-group-item list-group-item-action" href="https://ametice.univ-amu.fr/course/view.php?id=27569" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="tools-menu-drawer6"><div class=" m-l-1"><span class="fa fa-video-camera"></span> B-A-BA conception vidéo pédago</div></a><a class="list-group-item list-group-item-action" href="https://ident.univ-amu.fr/cas/login?service=https%3A%2F%2Fent.univ-amu.fr%2Fesup-helpdesk%2Fstylesheets%2Fcas.faces%3Fargs%3Dpage%253daddTicket%2526categoryId%253d639" data-key="" data-isexpandable="0" data-indent="1" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0" data-parent-key="tools-menu-drawer6"><div class=" m-l-1"><span class="fa fa-question-circle"></span> Assistance</div></a></ul>
+            </ul>
+        </nav>
+
+        <nav class="list-group m-t-1">
+                        <a class="list-group-item list-group-item-action " href="https://ametice.univ-amu.fr/admin/search.php">
+                <div class="m-l-0">
+                    <div class="media">
+                        <span class="media-left">
+                            <i class="icon fa fa-wrench fa-fw" aria-hidden="true"></i>
+                        </span>
+                        <span class="media-body ">Administration du site</span>
+                    </div>
+                </div>
+            </a>
+        </nav>
+    </div>
+</div>
+
+<div id="main-navbar" class="d-none d-lg-block">
+    <div class="container">
+        <div class="navbar navbar-expand-md btco-hover-menu">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <nav role="navigation" aria-label="Liens du site">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a title="" class="nav-link" href="https://ametice.univ-amu.fr/?redirect=0"><i class="fa fa-home fa-lg"></i> Accueil</a></li><li class="nav-item"><a title="" class="nav-link" href="https://ametice.univ-amu.fr/my/index.php"><i class="fa fa-dashboard fa-lg"></i>  Tableau de bord</a></li><li class="nav-item dropdown my-auto"><a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#" class="nav-link dropdown-toggle my-auto" role="button" id="main-navigation0" aria-haspopup="true" aria-expanded="false" aria-controls="dropdownmain-navigation0" data-target="#" data-toggle="dropdown" title=""><i class="fa fa-briefcase fa-lg"></i> Mes cours</a><ul role="menu" class="dropdown-menu" id="dropdownmain-navigation0" aria-labelledby="main-navigation0"><li><a title="Enquête enseignement à distance" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=57005">Enquête enseignement à distance</a></li><li><a title="[19-20]-S2-M2105-Introduction aux interfaces homme-machine (IHM) (R. Raffin)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=49244">[19-20]-M2105</a></li><li><a title="[18-19]-S1-M1102- Introduction à l&#39;algorithmique et à la programmation (B. Desbenoit)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=37794">[18-19]-S1-M1102 - Algo. / Prog.</a></li><li><a title="[18-19]-S1-M1103- Structure de données et algorithmes fondamentaux (Brett Desbenoit)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=37845">[18-19]-M1103 SdD</a></li><li><a title="[18-19]-S1-M1104- Introduction aux bases de données (Laurent Carmignac)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=37809">[18-19]-S1_M1104 intro aux BDD</a></li><li><a title="[18-19]-S2-M2103- Bases de la programmation orientée objet (E. Remy)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=37593">[18-19]-M2103-POO</a></li><li><a title="[18-19]-S2-M2201-Graphes et langages (Bruno Colombel)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=38053">[18-19]-S2-M2201-Graphes et langa...</a></li><li><a title="[18-19]- S1 - M1202 - Algèbre linéaire (Bruno Colombel)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=37993">[18-19]-M1202 - Algèbre linéaire</a></li><li><a title="[18-19]-S2-M2106- Programmation et administration des bases de données (Laurent Carmignac)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=33065">[18-19]-S2 - M2106 Prog&amp;Admin</a></li><li><a title="[18-19]- S1 - M1201 - Mathématiques discrètes (Bruno Colombel)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=37985">[18-19]- S1 - M1201</a></li><li><a title="[19-20]-S4-M4204-Travailler en anglais (S. Rossignol)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=54724">[19-20]-M4204-Anglais</a></li><li><a title="[19-20]-S4-M4104Cip - Applications mobiles (Sébastien Thon)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=54129">[19-20]-M4104Cip</a></li><li><a title="[19-20]-S4-M4105- Moteurs 3D (Sébastien Thon)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=54086">[19-20]-S4-M4105- Moteurs 3D</a></li><li><a title="[19-20]-M4102Cip - Programmation répartie" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=53483">[19-20]-Prog Rep</a></li><li><a title="[19-20]-S4-M4202Cin- Connaissances Complémentaires en Imagerie Numérique (Sébastien Thon)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=53416">[19-20]-S4-M4202Cin- CCIN</a></li><li><a title="[19-20]-S4-M4102Cin- Synthèse d&#39;Images 2 (Sébastien Thon)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=53415">[19-20]-M4102Cin - Synthèse d'Ima...</a></li><li><a title="[19-20]-S4-M4105Cip - Compléments d&#39;informatique en vue d&#39;une insertion immédiate (B. Desbenoit)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=52913">[19-20]-M4105Cip</a></li><li><a title="[19-20]-S4-M4103Cip - Programmation Web - client riche (B. Desbenoit)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=52912">[19-20]-M4103Cip</a></li><li><a title="[19-20]-S4-M4202Cip-Introduction à la recherche opérationnelle et aide à la décision (B. Colombel)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=52711">[19-20]-S4-M4202Cip</a></li><li><a title="[19-20]-S3-M3103- Algorithmique avancée (Brett Desbenoit)" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=52174">[19-20]-S3-M3103-Algo. avancée</a></li></ul></li><li class="nav-item dropdown my-auto"><a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#" class="nav-link dropdown-toggle my-auto" role="button" id="main-navigation0" aria-haspopup="true" aria-expanded="false" aria-controls="dropdownmain-navigation0" data-target="#" data-toggle="dropdown" title=""><i class="fa fa-sitemap fa-lg"></i><span class="menutitle">Cours actuel</span></a><ul role="menu" class="dropdown-menu" id="dropdownmain-navigation0" aria-labelledby="main-navigation0"><li class="nav-item dropdown my-auto"><a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#" class="nav-link dropdown-toggle my-auto" role="button" id="main-navigation00" aria-haspopup="true" aria-expanded="false" aria-controls="dropdownmain-navigation00" data-target="#" data-toggle="dropdown" title=""><i class="icon fa fa-list-ol fa-lg"></i>Sections</a><ul role="menu" class="dropdown-menu" id="dropdownmain-navigation00" aria-labelledby="main-navigation00"><li><a class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=52174#section-0">Généralités</a></li><li><a class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=52174#section-1">Les tables de hachage</a></li><li><a class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=52174#section-2">Les Arbres</a></li><li><a class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=52174#section-3">Les Tas</a></li><li><a class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=52174#section-4">Projets</a></li></ul></li><li><a title="" class="dropdown-item" href="https://ametice.univ-amu.fr/user/index.php?id=52174"><i class="icon fa fa-users fa-lg"></i>Participants</a></li><li><a title="" class="dropdown-item" href="https://ametice.univ-amu.fr/grade/report/index.php?id=52174"><i class="icon fa fa-table fa-fw icon" aria-hidden="true"></i>Notes</a></li><li><a class="dropdown-item" href="https://ametice.univ-amu.fr/mod/assign/index.php?id=52174"><img class="icon icon" alt="" aria-hidden="true" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/icon.svg">Devoirs</a></li><li><a class="dropdown-item" href="https://ametice.univ-amu.fr/course/resources.php?id=52174"><img class="icon icon" alt="" aria-hidden="true" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/icon(1).svg">Ressources</a></li></ul></li>
+                    <li class="nav-item dropdown my-auto"><a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#" class="nav-link dropdown-toggle my-auto" role="button" id="0" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown0" data-target="#" data-toggle="dropdown"><span class="fa fa-address-card-o"></span> efoliAM</a><ul role="menu" class="dropdown-menu" id="dropdown0" aria-labelledby="0"><li><a class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=9133"> Qu'est-ce qu'efoliAM ?</a></li><li><a class="dropdown-item" href="https://ametice.univ-amu.fr/auth/mnet/jump.php?hostid=4"> Accès à efoliAM</a></li></ul></li><li class="nav-item dropdown my-auto"><a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#" class="nav-link dropdown-toggle my-auto" role="button" id="0" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown0" data-target="#" data-toggle="dropdown" title="Étudiants"><i class="fa fa-wrench fa-lg"></i><span class="menutitle">Étudiants</span></a><ul role="menu" class="dropdown-menu" id="dropdown0" aria-labelledby="0"><li><a title="Aides aux outils numériques" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=35068"><span class="fa fa-bullseye"></span> Aides aux outils numériques</a></li><li><a title="Practicéa : accompagnement nouveaux étudiants" class="dropdown-item" href="https://ametice.univ-amu.fr/course/index.php?categoryid=3210"><span class="fa fa-bullseye"></span> Practicéa : accompagnement nouveaux étudiants</a></li><li><a title="Assistance" class="dropdown-item" href="https://ident.univ-amu.fr/cas/login?service=https%3A%2F%2Fent.univ-amu.fr%2Fesup-helpdesk%2Fstylesheets%2Fcas.faces%3Fargs%3Dpage%253daddTicket%2526categoryId%253d646"><span class="fa fa-question-circle"></span> Assistance</a></li></ul></li><li class="nav-item dropdown my-auto"><a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#" class="nav-link dropdown-toggle my-auto" role="button" id="0" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown0" data-target="#" data-toggle="dropdown" title="Enseignants"><i class="fa fa-wrench fa-lg"></i><span class="menutitle">Enseignants</span></a><ul role="menu" class="dropdown-menu" id="dropdown0" aria-labelledby="0"><li><a title="Aide AMeTICE" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=12036"><span class="fa fa-bullseye"></span> Aide AMeTICE</a></li><li><a title="Aide Test AMeTICE" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=56164"><span class="fa fa-bullseye"></span> Aide Test AMeTICE</a></li><li><a title="Créer un cours" class="dropdown-item" href="https://ametice.univ-amu.fr/course/index.php?categoryid=1254"><span class="fa fa-search"></span> Créer un cours</a></li><li><a title="Expérimenter sur AMeTICE" class="dropdown-item" href="https://ametice.univ-amu.fr/course/index.php?categoryid=1253"><span class="fa fa-hand-o-right"></span> Expérimenter sur AMeTICE</a></li><li><a title="B-A-BA conception vidéo pédagogique" class="dropdown-item" href="https://ametice.univ-amu.fr/course/view.php?id=27569"><span class="fa fa-video-camera"></span> B-A-BA conception vidéo pédago</a></li><li><a title="Assistance" class="dropdown-item" href="https://ident.univ-amu.fr/cas/login?service=https%3A%2F%2Fent.univ-amu.fr%2Fesup-helpdesk%2Fstylesheets%2Fcas.faces%3Fargs%3Dpage%253daddTicket%2526categoryId%253d639"><span class="fa fa-question-circle"></span> Assistance</a></li></ul></li>                </ul>
+            </nav>
+
+                <ul class="navbar-nav ml-auto">
+
+                    
+                    
+                    <li class="nav-item mr-1"><div id="zoominicon" class="right nav-link" title="Cacher les blocs" data-hidetitle="Cacher les blocs" data-showtitle="Afficher les blocs"><i class="fa fa-lg fa-indent" aria-hidden="true"></i><span class="showhideblocksdesc">Cacher les blocs</span></div></li>                            <li class="nav-item mx-0 hbll">
+                                <a class="nav-link moodlewidth" href="javascript:void(0);" title="Plein écran">
+                                    <i class="fa fa-expand fa-lg"></i>
+                                                                    </a>
+                            </li>
+                            <li class="nav-item mx-0 sbll">
+                                <a class="nav-link moodlewidth" href="javascript:void(0);" title="Vue standard">
+                                    <i class="fa fa-compress fa-lg"></i>
+                                                                    </a>
+                            </li>
+                                    </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</header>
+
+
+<div class="container outercont">
+    <div class="row"><div id="page-navbar" class="col-12"><nav role="navigation" aria-label="Fil d&#39;ariane">
+            <ol class="breadcrumb d-none d-md-flex"><i title="Accueil" class="fa fa-folder-open fa-lg"></i><span class="separator"><i class="fa-angle-right fa"></i>
+                             </span><li><span tabindex="0">Mes cours</span></li><span class="separator"><i class="fa-angle-right fa"></i>
+                             </span><li><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" title="[19-20]-S3-M3103- Algorithmique avancée (Brett Desbenoit)" href="https://ametice.univ-amu.fr/course/view.php?id=52174"><span itemprop="title">[19-20]-S3-M3103-Algo. avancée</span></a></span></li><span class="separator"><i class="fa-angle-right fa"></i>
+                             </span><li><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="https://ametice.univ-amu.fr/course/view.php?id=52174#section-2"><span itemprop="title">Les Arbres</span></a></span></li><span class="separator"><i class="fa-angle-right fa"></i>
+                             </span><li class="lastli"><a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313" id="label_5_38" class="" tabindex="-1" title="Page">TP 03&amp;04 - Les arbres binaires de recherche</a></li></ol>
+        </nav></div></div>    <div id="page-content" class="row">
+        <section id="region-main" class="col-9">
+            <span class="notifications" id="user-notifications"></span><div role="main"><span id="maincontent"></span><h2>TP 03&amp;04 - Les arbres binaires de recherche</h2><div class="box generalbox center clearfix"><div class="no-overflow"><h3 id="les-arbres-binaires-de-recherche">Les arbres binaires de recherche</h3>
+<h4 id="programmation">Programmation</h4>
+<p>Une fois le travail préliminaire réalisé, vous allez vous intéresser à l’implantation du TAD <code style="white-space: pre;">Arbre</code> vu en TD. Il s’agit d’un arbre binaire de recherche. Dans un premier temps vous implanterez votre arbre de sorte que chaque nœud soit identifié par un <code style="white-space: pre;">string</code> et stocke un <code style="white-space: pre;">size_t</code>. Vous vous intéresserez tout particulièrement aux opérations d’insertion (à la racine et aux feuilles) ainsi qu’à l’opération de recherche. Une fois cette partie stable, vous pourrez regarder de plus prés la suppression. Enfin, vous rendrez votre code générique en utilisant les templates.</p>
+<h4 id="mesures-de-performance">Mesures de performance</h4>
+<p>Pour éprouver votre travail, vous réaliserez les mêmes mesures de performance que dans le TP 01 avec votre classe afin de comparer les résultats obtenus. Vous tracerez sur un même graphique les temps d’insertion pour chacune de ces structures ; idem pour la recherche.</p>
+<h4 id="profilage-de-lapplication">Profilage de l’application</h4>
+<p>Prenez soin au cours de votre développement de vérifier que votre programme utilise convenablement la mémoire et qu’aucune fuite ne soit présente. Pour cela vous avez à votre disposition <code style="white-space: pre;">gprof</code> et <code style="white-space: pre;">valgrind</code>. Si vous êtes sur votre machine, vous pouvez également regarder <code style="white-space: pre;">kcachegrind</code> qui permet d’explorer les sorties obtenues par ce dernier.</p>
+<p><strong>Bonus (pour la gloire)</strong> : C’est l’occasion ou jamais d’essayer d’utiliser les <em>Smart Pointers</em> (<a href="https://docs.microsoft.com/en-us/cpp/cpp/how-to-create-and-use-weak-ptr-instances?view=vs-2017">https://docs.microsoft.com/en-us/cpp/cpp/how-to-create-and-use-weak-ptr-instances?view=vs-2017</a>).</p></div></div><div class="modified">Modifié le: mercredi 4 décembre 2019, 10:14</div></div><nav class="activity_footer activity-navigation">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="float-left">
+                <a href="https://ametice.univ-amu.fr/mod/url/view.php?id=1241035&amp;forceview=1" id="prev-activity-link" class="previous_activity prevnext" title="Skip List"><span class="nav_icon"><i class="fa fa-angle-double-left"></i></span><span class="text"><span class="nav_guide">Activité précédente</span><br>Skip List</span></a>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="float-right">
+                <a href="https://ametice.univ-amu.fr/mod/resource/view.php?id=1224314&amp;forceview=1" id="next-activity-link" class="next_activity prevnext" title="Le Corbeau et le Renard"><span class="text"><span class="nav_guide">Activité suivante</span><br>Le Corbeau et le Renard</span><span class="nav_icon"><i class="fa fa-angle-double-right"></i></span></a>
+
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="jumpnav">
+    <div class="jumpmenu">
+    <form method="post" action="https://ametice.univ-amu.fr/course/jumpto.php" class="form-inline" id="url_select_f5f1da34e6197317">
+        <input type="hidden" name="sesskey" value="LMMjWDYOhv">
+            <label for="jump-to-activity" class="sr-only">
+                Aller à…
+            </label>
+        <select id="jump-to-activity" class="custom-select jumpmenu" name="jump">
+                    <option value="" selected="">Aller à…</option>
+                    <option value="/mod/url/view.php?id=1224304&amp;forceview=1">Chapitre 01 - Les tables de hachage</option>
+                    <option value="/mod/url/view.php?id=1224305&amp;forceview=1">TD 01 - Tables de hachage</option>
+                    <option value="/mod/page/view.php?id=1237989&amp;forceview=1">TP 01&amp;02 - Table de hachage et complexité (version 2019)</option>
+                    <option value="/mod/resource/view.php?id=1224308&amp;forceview=1">Jules Verne - Voyage au centre de la terre</option>
+                    <option value="/mod/assign/view.php?id=1237104&amp;forceview=1">Rendu de TP</option>
+                    <option value="/mod/url/view.php?id=1224310&amp;forceview=1">Chapitre 02 - Les arbres</option>
+                    <option value="/mod/url/view.php?id=1224311&amp;forceview=1">TD 02 - Les arbres</option>
+                    <option value="/mod/url/view.php?id=1241035&amp;forceview=1">Skip List</option>
+                    <option value="/mod/resource/view.php?id=1224314&amp;forceview=1">Le Corbeau et le Renard</option>
+                    <option value="/mod/resource/view.php?id=1242565&amp;forceview=1">Une implementation simple d'une abr</option>
+                    <option value="/mod/url/view.php?id=1238040&amp;forceview=1">Tas binaire</option>
+                    <option value="/mod/page/view.php?id=1242651&amp;forceview=1">TP5 - Les tas</option>
+                    <option value="/mod/resource/view.php?id=1242652&amp;forceview=1">words</option>
+                    <option value="/mod/resource/view.php?id=1243350&amp;forceview=1">Solution tp5</option>
+                    <option value="/mod/page/view.php?id=1224315&amp;forceview=1">2018-2019 - indexation de fichiers</option>
+                    <option value="/mod/url/view.php?id=1224319&amp;forceview=1">2017-2018 - Codage de Huffman</option>
+                    <option value="/mod/page/view.php?id=1224320&amp;forceview=1">2016-2017 - L'annuaire téléphonique</option>
+        </select>
+            <noscript>
+                <input type="submit" class="btn btn-secondary ml-1" value="Valider">
+            </noscript>
+    </form>
+</div>
+
+</div>        </section>
+
+        <aside id="block-region-side-post" class="col-3 d-print-none  block-region" data-blockregion="side-post" data-droptarget="1"><a class="skip skip-block" id="fsb-2" href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#sb-2">Passer Navigation</a><div id="inst4" class="block_navigation block mb-3" role="navigation" data-block="navigation" data-instanceid="4" aria-labelledby="instance-4-header"><div class="header"><div class="title" id="yui_3_17_2_1_1595777871523_33"><div class="block_action"><img class="block-hider-hide" alt="Cacher le bloc Navigation" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/switch_minus.svg" tabindex="0" title="Cacher le bloc Navigation"><img class="block-hider-show" alt="Montrer le bloc Navigation" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/switch_plus.svg" tabindex="0" title="Montrer le bloc Navigation"></div><h2 id="instance-4-header">Navigation</h2></div></div><div class="content"><ul class="block_tree list" role="tree" data-ajax-loader="block_navigation/nav_loader"><li class="type_unknown depth_1 contains_branch" aria-labelledby="label_1_1" tabindex="-1"><p class="tree_item branch canexpand navigation_node" role="treeitem" aria-expanded="true" aria-owns="random5f1da34e619731_group" data-collapsible="false" tabindex="0" aria-selected="true"><a tabindex="-1" id="label_1_1" href="https://ametice.univ-amu.fr/my/">Tableau de bord</a></p><ul id="random5f1da34e619731_group" role="group" tabindex="-1"><li class="type_setting depth_2 item_with_icon" aria-labelledby="label_2_2" tabindex="-1"><p class="tree_item hasicon" role="treeitem" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_2_2" href="https://ametice.univ-amu.fr/"><i class="icon fa fa-home fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">Accueil du site</span></a></p></li><li class="type_system depth_2 contains_branch" aria-labelledby="label_2_4" tabindex="-1"><p class="tree_item branch canexpand" role="treeitem" aria-expanded="true" aria-owns="random5f1da34e619733_group" tabindex="-1" aria-selected="false"><span tabindex="-1" id="label_2_4">Mes cours</span></p><ul id="random5f1da34e619733_group" role="group" tabindex="-1"><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_5" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_57005" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_5" title="Enquête enseignement à distance" href="https://ametice.univ-amu.fr/course/view.php?id=57005"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">Enquête enseignement à distance</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_6" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_49244" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_6" title="[19-20]-S2-M2105-Introduction aux interfaces homme-machine (IHM) (R. Raffin)" href="https://ametice.univ-amu.fr/course/view.php?id=49244"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[19-20]-M2105</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_7" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_37794" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_7" title="[18-19]-S1-M1102- Introduction à l&#39;algorithmique et à la programmation (B. Desbenoit)" href="https://ametice.univ-amu.fr/course/view.php?id=37794"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[18-19]-S1-M1102 - Algo. / Prog.</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_8" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_37845" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_8" title="[18-19]-S1-M1103- Structure de données et algorithmes fondamentaux (Brett Desbenoit)" href="https://ametice.univ-amu.fr/course/view.php?id=37845"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[18-19]-M1103 SdD</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_9" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_37809" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_9" title="[18-19]-S1-M1104- Introduction aux bases de données (Laurent Carmignac)" href="https://ametice.univ-amu.fr/course/view.php?id=37809"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[18-19]-S1_M1104 intro aux BDD</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_10" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_37593" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_10" title="[18-19]-S2-M2103- Bases de la programmation orientée objet (E. Remy)" href="https://ametice.univ-amu.fr/course/view.php?id=37593"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[18-19]-M2103-POO</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_11" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_38053" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_11" title="[18-19]-S2-M2201-Graphes et langages (Bruno Colombel)" href="https://ametice.univ-amu.fr/course/view.php?id=38053"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[18-19]-S2-M2201-Graphes et langages (Bruno Colombel)</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_12" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_37993" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_12" title="[18-19]- S1 - M1202 - Algèbre linéaire (Bruno Colombel)" href="https://ametice.univ-amu.fr/course/view.php?id=37993"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[18-19]-M1202 - Algèbre linéaire</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_13" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_33065" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_13" title="[18-19]-S2-M2106- Programmation et administration des bases de données (Laurent Carmignac)" href="https://ametice.univ-amu.fr/course/view.php?id=33065"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[18-19]-S2 - M2106 Prog&amp;Admin</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_14" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_37985" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_14" title="[18-19]- S1 - M1201 - Mathématiques discrètes (Bruno Colombel)" href="https://ametice.univ-amu.fr/course/view.php?id=37985"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[18-19]- S1 - M1201</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_15" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_54724" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_15" title="[19-20]-S4-M4204-Travailler en anglais (S. Rossignol)" href="https://ametice.univ-amu.fr/course/view.php?id=54724"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[19-20]-M4204-Anglais</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_16" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_54129" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_16" title="[19-20]-S4-M4104Cip - Applications mobiles (Sébastien Thon)" href="https://ametice.univ-amu.fr/course/view.php?id=54129"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[19-20]-M4104Cip</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_17" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_54086" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_17" title="[19-20]-S4-M4105- Moteurs 3D (Sébastien Thon)" href="https://ametice.univ-amu.fr/course/view.php?id=54086"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[19-20]-S4-M4105- Moteurs 3D</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_18" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_53483" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_18" title="[19-20]-M4102Cip - Programmation répartie" href="https://ametice.univ-amu.fr/course/view.php?id=53483"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[19-20]-Prog Rep</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_19" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_53416" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_19" title="[19-20]-S4-M4202Cin- Connaissances Complémentaires en Imagerie Numérique (Sébastien Thon)" href="https://ametice.univ-amu.fr/course/view.php?id=53416"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[19-20]-S4-M4202Cin- CCIN</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_20" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_53415" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_20" title="[19-20]-S4-M4102Cin- Synthèse d&#39;Images 2 (Sébastien Thon)" href="https://ametice.univ-amu.fr/course/view.php?id=53415"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[19-20]-M4102Cin - Synthèse d'Images 2</span></a></p></li><li class="type_course depth_3 item_with_icon" aria-labelledby="label_3_21" tabindex="-1"><p class="tree_item hasicon" role="treeitem" id="expandable_branch_20_52913" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_21" title="[19-20]-S4-M4105Cip - Compléments d&#39;informatique en vue d&#39;une insertion immédiate (B. Desbenoit)" href="https://ametice.univ-amu.fr/course/view.php?id=52913"><i class="icon fa fa-graduation-cap fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">[19-20]-M4105Cip</span></a></p></li><li class="type_course depth_3 contains_branch" aria-labelledby="label_3_23" tabindex="-1"><p class="tree_item branch" role="treeitem" aria-expanded="true" aria-owns="random5f1da34e619734_group" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_23" title="[19-20]-S3-M3103- Algorithmique avancée (Brett Desbenoit)" href="https://ametice.univ-amu.fr/course/view.php?id=52174">[19-20]-S3-M3103-Algo. avancée</a></p><ul id="random5f1da34e619734_group" role="group" tabindex="-1"><li class="type_container depth_4 contains_branch" aria-labelledby="label_4_24" tabindex="-1"><p class="tree_item branch" role="treeitem" aria-expanded="false" aria-owns="random5f1da34e619735_group" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_4_24" href="https://ametice.univ-amu.fr/user/index.php?id=52174">Participants</a></p><ul id="random5f1da34e619735_group" role="group" aria-hidden="true" tabindex="-1"><li class="type_setting depth_5 item_with_icon" aria-labelledby="label_5_25" tabindex="-1"><p class="tree_item hasicon" role="treeitem" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_5_25" href="https://ametice.univ-amu.fr/blog/index.php?courseid=52174"><i class="icon fa fa-fw fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">Blogs de cours</span></a></p></li><li class="type_user depth_5 item_with_icon" aria-labelledby="label_5_26" tabindex="-1"><p class="tree_item hasicon" role="treeitem" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_5_26" href="https://ametice.univ-amu.fr/user/view.php?id=2642013&amp;course=52174"><i class="icon fa fa-fw fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">Matthieu TRINQUART</span></a></p></li></ul></li><li class="type_setting depth_4 item_with_icon" aria-labelledby="label_4_27" tabindex="-1"><p class="tree_item hasicon" role="treeitem" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_4_27" href="https://ametice.univ-amu.fr/badges/view.php?type=2&amp;id=52174"><i class="icon fa fa-shield fa-fw navicon" title="Badges" aria-label="Badges" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">Badges</span></a></p></li><li class="type_setting depth_4 item_with_icon" aria-labelledby="label_4_28" tabindex="-1"><p class="tree_item hasicon" role="treeitem" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_4_28" href="https://ametice.univ-amu.fr/admin/tool/lp/coursecompetencies.php?courseid=52174"><i class="icon fa fa-check-square-o fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">Compétences</span></a></p></li><li class="type_setting depth_4 item_with_icon" aria-labelledby="label_4_29" tabindex="-1"><p class="tree_item hasicon" role="treeitem" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_4_29" href="https://ametice.univ-amu.fr/grade/report/index.php?id=52174"><i class="icon fa fa-table fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">Notes</span></a></p></li><li class="type_structure depth_4 contains_branch" aria-labelledby="label_4_32" tabindex="-1"><p class="tree_item branch" role="treeitem" aria-expanded="true" aria-owns="random5f1da34e6197311_group" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_4_32" href="https://ametice.univ-amu.fr/course/view.php?id=52174#section-2">Les Arbres</a></p><ul id="random5f1da34e6197311_group" role="group" tabindex="-1"><li class="type_activity depth_5 item_with_icon current_branch" aria-labelledby="label_5_38" tabindex="-1"><p class="tree_item hasicon active_tree_node" role="treeitem" tabindex="-1" aria-selected="false"><a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313" id="label_5_38" class="" tabindex="-1" title="Page"><img class="icon navicon" alt="Page" title="Page" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/icon(2).svg" tabindex="-1"><span class="item-content-wrap" tabindex="-1">TP 03&amp;04 - Les arbres binaires de recherche</span></a></p></li></ul></li></ul></li><li class="type_custom depth_3 item_with_icon" aria-labelledby="label_3_44" tabindex="-1"><p class="tree_item hasicon" role="treeitem" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_3_44" href="https://ametice.univ-amu.fr/my/"><i class="icon fa fa-fw fa-fw navicon" aria-hidden="true" tabindex="-1"></i><span class="item-content-wrap" tabindex="-1">Plus…</span></a></p></li></ul></li><li class="type_system depth_2 contains_branch" aria-labelledby="label_2_45" tabindex="-1"><p class="tree_item branch" role="treeitem" id="expandable_branch_0_courses" aria-expanded="false" data-requires-ajax="true" data-loaded="false" data-node-id="expandable_branch_0_courses" data-node-key="courses" data-node-type="0" tabindex="-1" aria-selected="false"><a tabindex="-1" id="label_2_45" href="https://ametice.univ-amu.fr/course/index.php">Cours</a></p></li></ul></li></ul></div></div><span class="skip-block-to" id="sb-2"></span></aside><div id="showsidebaricon" title="Show / hide the sidebar" style="top: 459.5px;"><i class="fa fa-3x fa-angle-left" aria-hidden="true"></i></div>    </div>
+</div>
+
+<div id="drawer-5f1da34e6b8f65f1da34e6197319" class=" drawer bg-white hidden" aria-expanded="false" aria-hidden="true" data-region="right-hand-drawer" role="region" tabindex="0">
+            <div id="message-drawer-5f1da34e6b8f65f1da34e6197319" class="message-app" data-region="message-drawer" role="region">
+            <div class="closewidget bg-light border-bottom text-right">
+                <a class="text-dark" data-action="closedrawer" href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#">
+                     <i class="icon fa fa-window-close fa-fw " title="Fermer" aria-label="Fermer"></i>
+                </a>
+            </div>
+            <div class="header-container position-relative" data-region="header-container">
+                <div class="hidden border-bottom px-2 py-3" aria-hidden="true" data-region="view-contacts">
+                    <div class="d-flex align-items-center">
+                        <div class="align-self-stretch">
+                            <a class="h-100 d-flex align-items-center mr-2" href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#" data-route-back="" role="button">
+                                <div class="icon-back-in-drawer">
+                                    <span class="dir-rtl-hide"><i class="icon fa fa-chevron-left fa-fw " aria-hidden="true"></i></span>
+                                    <span class="dir-ltr-hide"><i class="icon fa fa-chevron-right fa-fw " aria-hidden="true"></i></span>
+                                </div>
+                                <div class="icon-back-in-app">
+                                    <span class="dir-rtl-hide"><i class="icon fa fa-times fa-fw " aria-hidden="true"></i></span>
+                                </div>                            </a>
+                        </div>
+                        <div>
+                            Contacts
+                        </div>
+                        <div class="ml-auto">
+                            <a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#" data-route="view-search" role="button" aria-label="Recherche">
+                                <i class="icon fa fa-search fa-fw " aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>                
+                <div class="hidden bg-white position-relative border-bottom p-1 p-sm-2" aria-hidden="true" data-region="view-conversation">
+                    <div class="hidden" data-region="header-content"></div>
+                    <div class="hidden" data-region="header-edit-mode">
+                        
+                        <div class="d-flex p-2 align-items-center">
+                            Messages sélectionnés&nbsp;:
+                            <span class="ml-1" data-region="message-selected-court">1</span>
+                            <button type="button" class="ml-auto close" aria-label="Annuler la sélection de message" data-action="cancel-edit-mode">
+                                    <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div data-region="header-placeholder">
+                        <div class="d-flex">
+                            <div class="ml-2 rounded-circle bg-pulse-grey align-self-center" style="height: 38px; width: 38px">
+                            </div>
+                            <div class="ml-2 " style="flex: 1">
+                                <div class="mt-1 bg-pulse-grey w-75" style="height: 16px;">
+                                </div>
+                            </div>
+                            <div class="ml-2 bg-pulse-grey align-self-center" style="height: 16px; width: 20px">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden position-absolute" data-region="confirm-dialogue-container" style="top: 0; bottom: -1px; right: 0; left: 0; background: rgba(0,0,0,0.3);"></div>
+                </div>                <div class="border-bottom  p-1 px-sm-2 py-sm-3" aria-hidden="false" data-region="view-overview">
+                    <div class="d-flex align-items-center">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text pr-2 bg-white">
+                                    <i class="icon fa fa-search fa-fw " aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control border-left-0" placeholder="Recherche" aria-label="Recherche" data-region="view-overview-search-input">
+                        </div>
+                        <div class="ml-2">
+                            <a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#" data-route="view-settings" data-route-param="2642013" aria-label="Réglages" role="button">
+                                <i class="icon fa fa-cog fa-fw " aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text-right mt-sm-3">
+                        <a href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#" data-route="view-contacts" role="button">
+                            <i class="icon fa fa-user fa-fw " aria-hidden="true"></i>
+                            Contacts
+                            <span class="badge badge-primary bg-primary ml-2 hidden" data-region="contact-request-count" aria-label="Il y a 0 demandes de contact en attente">
+                                0
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hidden border-bottom px-2 py-3 view-search" aria-hidden="true" data-region="view-search">
+                    <div class="d-flex align-items-center">
+                        <a class="mr-2 align-self-stretch d-flex align-items-center" href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#" data-route-back="" data-action="cancel-search" role="button">
+                            <div class="icon-back-in-drawer">
+                                <span class="dir-rtl-hide"><i class="icon fa fa-chevron-left fa-fw " aria-hidden="true"></i></span>
+                                <span class="dir-ltr-hide"><i class="icon fa fa-chevron-right fa-fw " aria-hidden="true"></i></span>
+                            </div>
+                            <div class="icon-back-in-app">
+                                <span class="dir-rtl-hide"><i class="icon fa fa-times fa-fw " aria-hidden="true"></i></span>
+                            </div>                        </a>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Recherche" aria-label="Recherche" data-region="search-input">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" data-action="search" aria-label="Recherche">
+                                    <span data-region="search-icon-container">
+                                        <i class="icon fa fa-search fa-fw " aria-hidden="true"></i>
+                                    </span>
+                                    <span class="hidden" data-region="loading-icon-container">
+                                        <span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                <div class="hidden border-bottom px-2 py-3" aria-hidden="true" data-region="view-settings">
+                    <div class="d-flex align-items-center">
+                        <div class="align-self-stretch">
+                            <a class="h-100 d-flex mr-2 align-items-center" href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#" data-route-back="" role="button">
+                                <div class="icon-back-in-drawer">
+                                    <span class="dir-rtl-hide"><i class="icon fa fa-chevron-left fa-fw " aria-hidden="true"></i></span>
+                                    <span class="dir-ltr-hide"><i class="icon fa fa-chevron-right fa-fw " aria-hidden="true"></i></span>
+                                </div>
+                                <div class="icon-back-in-app">
+                                    <span class="dir-rtl-hide"><i class="icon fa fa-times fa-fw " aria-hidden="true"></i></span>
+                                </div>                            </a>
+                        </div>
+                        <div>
+                            Paramètres
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="body-container position-relative" data-region="body-container">
+                
+                <div class="hidden" data-region="view-contact" aria-hidden="true">
+                    <div class="p-2 pt-3" data-region="content-container"></div>
+                </div>                <div class="hidden h-100" data-region="view-contacts" aria-hidden="true" data-user-id="2642013">
+                    <div class="d-flex flex-column h-100">
+                        <div class="p-3 border-bottom">
+                            <ul class="nav nav-pills nav-fill" role="tablist">
+                                <li class="nav-item">
+                                    <a id="contacts-tab-5f1da34e6b8f65f1da34e6197319" class="nav-link active" href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#contacts-tab-panel-5f1da34e6b8f65f1da34e6197319" data-toggle="tab" data-action="show-contacts-section" role="tab" aria-controls="contacts-tab-panel-5f1da34e6b8f65f1da34e6197319" aria-selected="true">
+                                        Contacts
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="requests-tab-5f1da34e6b8f65f1da34e6197319" class="nav-link" href="https://ametice.univ-amu.fr/mod/page/view.php?id=1224313#requests-tab-panel-5f1da34e6b8f65f1da34e6197319" data-toggle="tab" data-action="show-requests-section" role="tab" aria-controls="requests-tab-panel-5f1da34e6b8f65f1da34e6197319" aria-selected="false">
+                                        Demandes
+                                        <span class="badge badge-primary bg-primary ml-2 hidden" data-region="contact-request-count" aria-label="Il y a 0 demandes de contact en attente">
+                                            0
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content d-flex flex-column h-100">
+                                            <div class="tab-pane fade show active h-100 lazy-load-list" aria-live="polite" data-region="lazy-load-list" data-user-id="2642013" id="contacts-tab-panel-5f1da34e6b8f65f1da34e6197319" data-section="contacts" role="tabpanel" aria-labelledby="contacts-tab-5f1da34e6b8f65f1da34e6197319">
+                    
+                    <div class="hidden text-center p-2" data-region="empty-message-container">
+                        Aucun contact
+                    </div>
+                    <div class="hidden list-group" data-region="content-container">
+                        
+                    </div>
+                    <div class="list-group" data-region="placeholder-container">
+                        
+                    </div>
+                    <div class="w-100 text-center p-3 hidden" data-region="loading-icon-container">
+                        <span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+                    </div>
+                </div>
+                
+                                            <div class="tab-pane fade h-100 lazy-load-list" aria-live="polite" data-region="lazy-load-list" data-user-id="2642013" id="requests-tab-panel-5f1da34e6b8f65f1da34e6197319" data-section="requests" role="tabpanel" aria-labelledby="requests-tab-5f1da34e6b8f65f1da34e6197319">
+                    
+                    <div class="hidden text-center p-2" data-region="empty-message-container">
+                        Aucune demande de contact
+                    </div>
+                    <div class="hidden list-group" data-region="content-container">
+                        
+                    </div>
+                    <div class="list-group" data-region="placeholder-container">
+                        
+                    </div>
+                    <div class="w-100 text-center p-3 hidden" data-region="loading-icon-container">
+                        <span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+                    </div>
+                </div>
+                        </div>
+                    </div>
+                </div>                
+                <div class="view-conversation hidden h-100" aria-hidden="true" data-region="view-conversation" data-user-id="2642013" data-midnight="1595714400" data-message-poll-min="10" data-message-poll-max="120" data-message-poll-after-max="300" style="overflow-y: auto; overflow-x: hidden">
+                    <div class="position-relative h-100" data-region="content-container" style="overflow-y: auto; overflow-x: hidden">
+                        <div class="content-message-container hidden h-100 px-2 pt-0" data-region="content-message-container" role="log" style="overflow-y: auto; overflow-x: hidden">
+                            <div class="py-3 sticky-top z-index-1 border-bottom text-center hidden" data-region="contact-request-sent-message-container">
+                                <p class="m-0">Demande de contact envoyée</p>
+                                <p class="font-italic font-weight-light" data-region="text"></p>
+                            </div>
+                            <div class="p-3 text-center hidden" data-region="self-conversation-message-container">
+                                <p class="m-0">Espace personnel</p>
+                                <p class="font-italic font-weight-light" data-region="text">Enregistrer des brouillons, liens, note, etc. pour un usage ultérieur.</p>
+                           </div>
+                            <div class="hidden text-center p-3" data-region="more-messages-loading-icon-container"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</div>
+                        </div>
+                        <div class="p-4 w-100 h-100 hidden position-absolute" data-region="confirm-dialogue-container" style="top: 0; background: rgba(0,0,0,0.3);">
+                            
+                            <div class="p-3 bg-white" data-region="confirm-dialogue" role="alert">
+                                <p class="text-muted" data-region="dialogue-text"></p>
+                                <div class="mb-2 custom-control custom-checkbox hidden" data-region="delete-messages-for-all-users-toggle-container">
+                                    <input type="checkbox" class="custom-control-input" id="delete-messages-for-all-users" data-region="delete-messages-for-all-users-toggle">
+                                    <label class="custom-control-label text-muted" for="delete-messages-for-all-users">
+                                        Supprimer pour moi et et pour tous les autres
+                                    </label>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-block hidden" data-action="confirm-block">
+                                    <span data-region="dialogue-button-text">Bloc</span>
+                                    <span class="hidden" data-region="loading-icon-container"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</span>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-block hidden" data-action="confirm-unblock">
+                                    <span data-region="dialogue-button-text">Débloquer</span>
+                                    <span class="hidden" data-region="loading-icon-container"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</span>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-block hidden" data-action="confirm-remove-contact">
+                                    <span data-region="dialogue-button-text">Supprimer</span>
+                                    <span class="hidden" data-region="loading-icon-container"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</span>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-block hidden" data-action="confirm-add-contact">
+                                    <span data-region="dialogue-button-text">Ajouter</span>
+                                    <span class="hidden" data-region="loading-icon-container"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</span>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-block hidden" data-action="confirm-delete-selected-messages">
+                                    <span data-region="dialogue-button-text">Supprimer</span>
+                                    <span class="hidden" data-region="loading-icon-container"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</span>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-block hidden" data-action="confirm-delete-conversation">
+                                    <span data-region="dialogue-button-text">Supprimer</span>
+                                    <span class="hidden" data-region="loading-icon-container"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</span>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-block hidden" data-action="request-add-contact">
+                                    <span data-region="dialogue-button-text">Envoyer une demande de contact</span>
+                                    <span class="hidden" data-region="loading-icon-container"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</span>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-block hidden" data-action="accept-contact-request">
+                                    <span data-region="dialogue-button-text">Accepter et ajouter aux contacts</span>
+                                    <span class="hidden" data-region="loading-icon-container"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-block hidden" data-action="decline-contact-request">
+                                    <span data-region="dialogue-button-text">Décliner</span>
+                                    <span class="hidden" data-region="loading-icon-container"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</span>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-block" data-action="okay-confirm">OK</button>
+                                <button type="button" class="btn btn-secondary btn-block" data-action="cancel-confirm">Annuler</button>
+                            </div>
+                        </div>
+                        <div class="px-2 pb-2 pt-0" data-region="content-placeholder">
+                            <div class="h-100 d-flex flex-column">
+                                <div class="px-2 pb-2 pt-0 bg-light h-100" style="overflow-y: auto">
+                                    <div class="mt-4">
+                                        <div class="mb-4">
+                                            <div class="mx-auto bg-white" style="height: 25px; width: 100px"></div>
+                                        </div>
+                                        <div class="d-flex flex-column p-2 bg-white rounded mb-2">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="mr-2">
+                                                    <div class="rounded-circle bg-pulse-grey" style="height: 35px; width: 35px"></div>
+                                                </div>
+                                                <div class="mr-4 w-75 bg-pulse-grey" style="height: 16px"></div>
+                                                <div class="ml-auto bg-pulse-grey" style="width: 35px; height: 16px"></div>
+                                            </div>
+                                            <div class="bg-pulse-grey w-100" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-75 mt-2" style="height: 16px"></div>
+                                        </div>
+                                        <div class="d-flex flex-column p-2 bg-white rounded mb-2">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="mr-2">
+                                                    <div class="rounded-circle bg-pulse-grey" style="height: 35px; width: 35px"></div>
+                                                </div>
+                                                <div class="mr-4 w-75 bg-pulse-grey" style="height: 16px"></div>
+                                                <div class="ml-auto bg-pulse-grey" style="width: 35px; height: 16px"></div>
+                                            </div>
+                                            <div class="bg-pulse-grey w-100" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-75 mt-2" style="height: 16px"></div>
+                                        </div>
+                                        <div class="d-flex flex-column p-2 bg-white rounded mb-2">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="mr-2">
+                                                    <div class="rounded-circle bg-pulse-grey" style="height: 35px; width: 35px"></div>
+                                                </div>
+                                                <div class="mr-4 w-75 bg-pulse-grey" style="height: 16px"></div>
+                                                <div class="ml-auto bg-pulse-grey" style="width: 35px; height: 16px"></div>
+                                            </div>
+                                            <div class="bg-pulse-grey w-100" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-75 mt-2" style="height: 16px"></div>
+                                        </div>
+                                    </div>                                    <div class="mt-4">
+                                        <div class="mb-4">
+                                            <div class="mx-auto bg-white" style="height: 25px; width: 100px"></div>
+                                        </div>
+                                        <div class="d-flex flex-column p-2 bg-white rounded mb-2">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="mr-2">
+                                                    <div class="rounded-circle bg-pulse-grey" style="height: 35px; width: 35px"></div>
+                                                </div>
+                                                <div class="mr-4 w-75 bg-pulse-grey" style="height: 16px"></div>
+                                                <div class="ml-auto bg-pulse-grey" style="width: 35px; height: 16px"></div>
+                                            </div>
+                                            <div class="bg-pulse-grey w-100" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-75 mt-2" style="height: 16px"></div>
+                                        </div>
+                                        <div class="d-flex flex-column p-2 bg-white rounded mb-2">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="mr-2">
+                                                    <div class="rounded-circle bg-pulse-grey" style="height: 35px; width: 35px"></div>
+                                                </div>
+                                                <div class="mr-4 w-75 bg-pulse-grey" style="height: 16px"></div>
+                                                <div class="ml-auto bg-pulse-grey" style="width: 35px; height: 16px"></div>
+                                            </div>
+                                            <div class="bg-pulse-grey w-100" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-75 mt-2" style="height: 16px"></div>
+                                        </div>
+                                        <div class="d-flex flex-column p-2 bg-white rounded mb-2">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="mr-2">
+                                                    <div class="rounded-circle bg-pulse-grey" style="height: 35px; width: 35px"></div>
+                                                </div>
+                                                <div class="mr-4 w-75 bg-pulse-grey" style="height: 16px"></div>
+                                                <div class="ml-auto bg-pulse-grey" style="width: 35px; height: 16px"></div>
+                                            </div>
+                                            <div class="bg-pulse-grey w-100" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-75 mt-2" style="height: 16px"></div>
+                                        </div>
+                                    </div>                                    <div class="mt-4">
+                                        <div class="mb-4">
+                                            <div class="mx-auto bg-white" style="height: 25px; width: 100px"></div>
+                                        </div>
+                                        <div class="d-flex flex-column p-2 bg-white rounded mb-2">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="mr-2">
+                                                    <div class="rounded-circle bg-pulse-grey" style="height: 35px; width: 35px"></div>
+                                                </div>
+                                                <div class="mr-4 w-75 bg-pulse-grey" style="height: 16px"></div>
+                                                <div class="ml-auto bg-pulse-grey" style="width: 35px; height: 16px"></div>
+                                            </div>
+                                            <div class="bg-pulse-grey w-100" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-75 mt-2" style="height: 16px"></div>
+                                        </div>
+                                        <div class="d-flex flex-column p-2 bg-white rounded mb-2">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="mr-2">
+                                                    <div class="rounded-circle bg-pulse-grey" style="height: 35px; width: 35px"></div>
+                                                </div>
+                                                <div class="mr-4 w-75 bg-pulse-grey" style="height: 16px"></div>
+                                                <div class="ml-auto bg-pulse-grey" style="width: 35px; height: 16px"></div>
+                                            </div>
+                                            <div class="bg-pulse-grey w-100" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-75 mt-2" style="height: 16px"></div>
+                                        </div>
+                                        <div class="d-flex flex-column p-2 bg-white rounded mb-2">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="mr-2">
+                                                    <div class="rounded-circle bg-pulse-grey" style="height: 35px; width: 35px"></div>
+                                                </div>
+                                                <div class="mr-4 w-75 bg-pulse-grey" style="height: 16px"></div>
+                                                <div class="ml-auto bg-pulse-grey" style="width: 35px; height: 16px"></div>
+                                            </div>
+                                            <div class="bg-pulse-grey w-100" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-75 mt-2" style="height: 16px"></div>
+                                        </div>
+                                    </div>                                    <div class="mt-4">
+                                        <div class="mb-4">
+                                            <div class="mx-auto bg-white" style="height: 25px; width: 100px"></div>
+                                        </div>
+                                        <div class="d-flex flex-column p-2 bg-white rounded mb-2">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="mr-2">
+                                                    <div class="rounded-circle bg-pulse-grey" style="height: 35px; width: 35px"></div>
+                                                </div>
+                                                <div class="mr-4 w-75 bg-pulse-grey" style="height: 16px"></div>
+                                                <div class="ml-auto bg-pulse-grey" style="width: 35px; height: 16px"></div>
+                                            </div>
+                                            <div class="bg-pulse-grey w-100" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-75 mt-2" style="height: 16px"></div>
+                                        </div>
+                                        <div class="d-flex flex-column p-2 bg-white rounded mb-2">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="mr-2">
+                                                    <div class="rounded-circle bg-pulse-grey" style="height: 35px; width: 35px"></div>
+                                                </div>
+                                                <div class="mr-4 w-75 bg-pulse-grey" style="height: 16px"></div>
+                                                <div class="ml-auto bg-pulse-grey" style="width: 35px; height: 16px"></div>
+                                            </div>
+                                            <div class="bg-pulse-grey w-100" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-75 mt-2" style="height: 16px"></div>
+                                        </div>
+                                        <div class="d-flex flex-column p-2 bg-white rounded mb-2">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="mr-2">
+                                                    <div class="rounded-circle bg-pulse-grey" style="height: 35px; width: 35px"></div>
+                                                </div>
+                                                <div class="mr-4 w-75 bg-pulse-grey" style="height: 16px"></div>
+                                                <div class="ml-auto bg-pulse-grey" style="width: 35px; height: 16px"></div>
+                                            </div>
+                                            <div class="bg-pulse-grey w-100" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-75 mt-2" style="height: 16px"></div>
+                                        </div>
+                                    </div>                                    <div class="mt-4">
+                                        <div class="mb-4">
+                                            <div class="mx-auto bg-white" style="height: 25px; width: 100px"></div>
+                                        </div>
+                                        <div class="d-flex flex-column p-2 bg-white rounded mb-2">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="mr-2">
+                                                    <div class="rounded-circle bg-pulse-grey" style="height: 35px; width: 35px"></div>
+                                                </div>
+                                                <div class="mr-4 w-75 bg-pulse-grey" style="height: 16px"></div>
+                                                <div class="ml-auto bg-pulse-grey" style="width: 35px; height: 16px"></div>
+                                            </div>
+                                            <div class="bg-pulse-grey w-100" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-75 mt-2" style="height: 16px"></div>
+                                        </div>
+                                        <div class="d-flex flex-column p-2 bg-white rounded mb-2">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="mr-2">
+                                                    <div class="rounded-circle bg-pulse-grey" style="height: 35px; width: 35px"></div>
+                                                </div>
+                                                <div class="mr-4 w-75 bg-pulse-grey" style="height: 16px"></div>
+                                                <div class="ml-auto bg-pulse-grey" style="width: 35px; height: 16px"></div>
+                                            </div>
+                                            <div class="bg-pulse-grey w-100" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-75 mt-2" style="height: 16px"></div>
+                                        </div>
+                                        <div class="d-flex flex-column p-2 bg-white rounded mb-2">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="mr-2">
+                                                    <div class="rounded-circle bg-pulse-grey" style="height: 35px; width: 35px"></div>
+                                                </div>
+                                                <div class="mr-4 w-75 bg-pulse-grey" style="height: 16px"></div>
+                                                <div class="ml-auto bg-pulse-grey" style="width: 35px; height: 16px"></div>
+                                            </div>
+                                            <div class="bg-pulse-grey w-100" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-100 mt-2" style="height: 16px"></div>
+                                            <div class="bg-pulse-grey w-75 mt-2" style="height: 16px"></div>
+                                        </div>
+                                    </div>                                </div>
+                            </div>                        </div>
+                    </div>
+                </div>
+                
+                <div class="hidden" aria-hidden="true" data-region="view-group-info">
+                    <div class="pt-3 h-100 d-flex flex-column" data-region="group-info-content-container" style="overflow-y: auto"></div>
+                </div>                <div class="h-100 view-overview-body" aria-hidden="false" data-region="view-overview" data-user-id="2642013">
+                    <div id="message-drawer-view-overview-container-5f1da34e6b8f65f1da34e6197319" class="d-flex flex-column h-100" style="overflow-y: auto">
+                            
+                            
+                            <div class="section border-0 card" data-region="view-overview-favourites">
+                                <div id="view-overview-favourites-toggle" class="card-header p-0" data-region="toggle">
+                                    <button class="btn btn-link w-100 text-left p-1 p-sm-2 d-flex align-items-center overview-section-toggle collapsed" data-toggle="collapse" data-target="#view-overview-favourites-target-5f1da34e6b8f65f1da34e6197319" aria-expanded="false" aria-controls="view-overview-favourites-target-5f1da34e6b8f65f1da34e6197319">
+                                        <span class="collapsed-icon-container">
+                                            <i class="icon fa fa-caret-right fa-fw " aria-hidden="true"></i>
+                                        </span>
+                                        <span class="expanded-icon-container">
+                                            <i class="icon fa fa-caret-down fa-fw " aria-hidden="true"></i>
+                                        </span>
+                                        <span class="font-weight-bold">Favori</span>
+                                        <small class="hidden ml-1" data-region="section-total-count-container" aria-label=" conversations">
+                                            (<span data-region="section-total-count"></span>)
+                                        </small>
+                                        <span class="hidden ml-2" data-region="loading-icon-container">
+                                            <span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+                                        </span>
+                                        <span class="hidden badge badge-pill badge-primary ml-auto bg-primary" data-region="section-unread-count">
+                                            
+                                        </span>
+                                    </button>
+                                </div>
+                                                            <div class="collapse border-bottom  lazy-load-list" aria-live="polite" data-region="lazy-load-list" data-user-id="2642013" id="view-overview-favourites-target-5f1da34e6b8f65f1da34e6197319" aria-labelledby="view-overview-favourites-toggle" data-parent="#message-drawer-view-overview-container-5f1da34e6b8f65f1da34e6197319">
+                                
+                                <div class="hidden text-center p-2" data-region="empty-message-container">
+                                            <p class="text-muted mt-2">Aucune conversation favorite</p>
+
+                                </div>
+                                <div class="hidden list-group" data-region="content-container">
+                                    
+                                </div>
+                                <div class="list-group" data-region="placeholder-container">
+                                            <div class="text-center py-2"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</div>
+
+                                </div>
+                                <div class="w-100 text-center p-3 hidden" data-region="loading-icon-container">
+                                    <span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+                                </div>
+                            </div>
+                            </div>
+                            
+                            
+                            <div class="section border-0 card" data-region="view-overview-group-messages">
+                                <div id="view-overview-group-messages-toggle" class="card-header p-0" data-region="toggle">
+                                    <button class="btn btn-link w-100 text-left p-1 p-sm-2 d-flex align-items-center overview-section-toggle collapsed" data-toggle="collapse" data-target="#view-overview-group-messages-target-5f1da34e6b8f65f1da34e6197319" aria-expanded="false" aria-controls="view-overview-group-messages-target-5f1da34e6b8f65f1da34e6197319">
+                                        <span class="collapsed-icon-container">
+                                            <i class="icon fa fa-caret-right fa-fw " aria-hidden="true"></i>
+                                        </span>
+                                        <span class="expanded-icon-container">
+                                            <i class="icon fa fa-caret-down fa-fw " aria-hidden="true"></i>
+                                        </span>
+                                        <span class="font-weight-bold">Groupe</span>
+                                        <small class="hidden ml-1" data-region="section-total-count-container" aria-label=" conversations">
+                                            (<span data-region="section-total-count"></span>)
+                                        </small>
+                                        <span class="hidden ml-2" data-region="loading-icon-container">
+                                            <span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+                                        </span>
+                                        <span class="hidden badge badge-pill badge-primary ml-auto bg-primary" data-region="section-unread-count">
+                                            
+                                        </span>
+                                    </button>
+                                </div>
+                                                            <div class="collapse border-bottom  lazy-load-list" aria-live="polite" data-region="lazy-load-list" data-user-id="2642013" id="view-overview-group-messages-target-5f1da34e6b8f65f1da34e6197319" aria-labelledby="view-overview-group-messages-toggle" data-parent="#message-drawer-view-overview-container-5f1da34e6b8f65f1da34e6197319">
+                                
+                                <div class="hidden text-center p-2" data-region="empty-message-container">
+                                            <p class="text-muted mt-2">Pas de conversation de groupe</p>
+
+                                </div>
+                                <div class="hidden list-group" data-region="content-container">
+                                    
+                                </div>
+                                <div class="list-group" data-region="placeholder-container">
+                                            <div class="text-center py-2"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</div>
+
+                                </div>
+                                <div class="w-100 text-center p-3 hidden" data-region="loading-icon-container">
+                                    <span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+                                </div>
+                            </div>
+                            </div>
+                            
+                            
+                            <div class="section border-0 card" data-region="view-overview-messages">
+                                <div id="view-overview-messages-toggle" class="card-header p-0" data-region="toggle">
+                                    <button class="btn btn-link w-100 text-left p-1 p-sm-2 d-flex align-items-center overview-section-toggle collapsed" data-toggle="collapse" data-target="#view-overview-messages-target-5f1da34e6b8f65f1da34e6197319" aria-expanded="false" aria-controls="view-overview-messages-target-5f1da34e6b8f65f1da34e6197319">
+                                        <span class="collapsed-icon-container">
+                                            <i class="icon fa fa-caret-right fa-fw " aria-hidden="true"></i>
+                                        </span>
+                                        <span class="expanded-icon-container">
+                                            <i class="icon fa fa-caret-down fa-fw " aria-hidden="true"></i>
+                                        </span>
+                                        <span class="font-weight-bold">Privée</span>
+                                        <small class="hidden ml-1" data-region="section-total-count-container" aria-label=" conversations">
+                                            (<span data-region="section-total-count"></span>)
+                                        </small>
+                                        <span class="hidden ml-2" data-region="loading-icon-container">
+                                            <span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+                                        </span>
+                                        <span class="hidden badge badge-pill badge-primary ml-auto bg-primary" data-region="section-unread-count">
+                                            
+                                        </span>
+                                    </button>
+                                </div>
+                                                            <div class="collapse border-bottom  lazy-load-list" aria-live="polite" data-region="lazy-load-list" data-user-id="2642013" id="view-overview-messages-target-5f1da34e6b8f65f1da34e6197319" aria-labelledby="view-overview-messages-toggle" data-parent="#message-drawer-view-overview-container-5f1da34e6b8f65f1da34e6197319">
+                                
+                                <div class="hidden text-center p-2" data-region="empty-message-container">
+                                            <p class="text-muted mt-2">Pas de conversation privée</p>
+
+                                </div>
+                                <div class="hidden list-group" data-region="content-container">
+                                    
+                                </div>
+                                <div class="list-group" data-region="placeholder-container">
+                                            <div class="text-center py-2"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</div>
+
+                                </div>
+                                <div class="w-100 text-center p-3 hidden" data-region="loading-icon-container">
+                                    <span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+                </div>
+                
+                <div data-region="view-search" aria-hidden="true" class="h-100 hidden" data-user-id="2642013" data-users-offset="0" data-messages-offset="0" style="overflow-y: auto">
+                    <div class="hidden" data-region="search-results-container" style="overflow-y: auto">
+                        
+                        <div class="d-flex flex-column">
+                            <div class="mb-3 bg-white" data-region="all-contacts-container">
+                                <div data-region="contacts-container" class="pt-2">
+                                    <h4 class="h6 px-2">Contacts</h4>
+                                    <div class="list-group" data-region="list"></div>
+                                </div>
+                                <div data-region="non-contacts-container" class="pt-2 border-top">
+                                    <h4 class="h6 px-2">Non contact</h4>
+                                    <div class="list-group" data-region="list"></div>
+                                </div>
+                                <div class="text-right">
+                                    <button class="btn btn-link text-primary" data-action="load-more-users">
+                                        <span data-region="button-text">Charger plus</span>
+                                        <span data-region="loading-icon-container" class="hidden"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bg-white" data-region="messages-container">
+                                <h4 class="h6 px-2 pt-2">Messages personnels</h4>
+                                <div class="list-group" data-region="list"></div>
+                                <div class="text-right">
+                                    <button class="btn btn-link text-primary" data-action="load-more-messages">
+                                        <span data-region="button-text">Charger plus</span>
+                                        <span data-region="loading-icon-container" class="hidden"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="hidden p-3 text-center" data-region="no-results-container">Aucun résultat</p>
+                        </div>                    </div>
+                    <div class="hidden" data-region="loading-placeholder">
+                        <div class="text-center pt-3 icon-size-4"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</div>
+                    </div>
+                    <div class="p-3 text-center" data-region="empty-message-container">
+                        <p>Rechercher des personnes et des messages</p>
+                    </div>
+                </div>                
+                <div class="h-100 hidden bg-white" aria-hidden="true" data-region="view-settings">
+                    <div class="hidden" data-region="content-container">
+                        
+                        <div data-region="settings" class="p-3">
+                            <h3 class="h6 font-weight-bold">Confidentialité</h3>
+                            <p>Vous pouvez choisir qui peut vous envoyer un message personnel</p>
+                            <div data-preference="blocknoncontacts" class="mb-3">
+                                <fieldset>
+                                    <legend class="sr-only">Accepter des messages de&nbsp;:</legend>
+                                        <div class="custom-control custom-radio mb-2">
+                                            <input type="radio" name="message_blocknoncontacts" class="custom-control-input" id="block-noncontacts-5f1da34e6b8f65f1da34e6197319-1" value="1">
+                                            <label class="custom-control-label ml-2" for="block-noncontacts-5f1da34e6b8f65f1da34e6197319-1">
+                                                Mes contacts seulement
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio mb-2">
+                                            <input type="radio" name="message_blocknoncontacts" class="custom-control-input" id="block-noncontacts-5f1da34e6b8f65f1da34e6197319-0" value="0">
+                                            <label class="custom-control-label ml-2" for="block-noncontacts-5f1da34e6b8f65f1da34e6197319-0">
+                                                Mes contacts et tout le monde dans mes cours
+                                            </label>
+                                        </div>
+                                </fieldset>
+                            </div>
+                        
+                            <div class="hidden" data-region="notification-preference-container">
+                                <h3 class="mb-2 mt-4 h6 font-weight-bold">Préférences de notification</h3>
+                            </div>
+                        
+                            <h3 class="mb-2 mt-4 h6 font-weight-bold">Général</h3>
+                            <div data-preference="entertosend">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="enter-to-send-5f1da34e6b8f65f1da34e6197319">
+                                    <label class="custom-control-label" for="enter-to-send-5f1da34e6b8f65f1da34e6197319">
+                                        Taper entrée pour envoyer
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-region="placeholder-container">
+                        
+                        <div class="d-flex flex-column p-3">
+                            <div class="w-25 bg-pulse-grey h6" style="height: 18px"></div>
+                            <div class="w-75 bg-pulse-grey mb-4" style="height: 18px"></div>
+                            <div class="mb-3">
+                                <div class="w-100 d-flex mb-3">
+                                    <div class="bg-pulse-grey rounded-circle" style="width: 18px; height: 18px"></div>
+                                    <div class="bg-pulse-grey w-50 ml-2" style="height: 18px"></div>
+                                </div>
+                                <div class="w-100 d-flex mb-3">
+                                    <div class="bg-pulse-grey rounded-circle" style="width: 18px; height: 18px"></div>
+                                    <div class="bg-pulse-grey w-50 ml-2" style="height: 18px"></div>
+                                </div>
+                                <div class="w-100 d-flex mb-3">
+                                    <div class="bg-pulse-grey rounded-circle" style="width: 18px; height: 18px"></div>
+                                    <div class="bg-pulse-grey w-50 ml-2" style="height: 18px"></div>
+                                </div>
+                            </div>
+                            <div class="w-50 bg-pulse-grey h6 mb-3 mt-2" style="height: 18px"></div>
+                            <div class="mb-4">
+                                <div class="w-100 d-flex mb-2 align-items-center">
+                                    <div class="bg-pulse-grey w-25" style="width: 18px; height: 27px"></div>
+                                    <div class="bg-pulse-grey w-25 ml-2" style="height: 18px"></div>
+                                </div>
+                                <div class="w-100 d-flex mb-2 align-items-center">
+                                    <div class="bg-pulse-grey w-25" style="width: 18px; height: 27px"></div>
+                                    <div class="bg-pulse-grey w-25 ml-2" style="height: 18px"></div>
+                                </div>
+                            </div>
+                            <div class="w-25 bg-pulse-grey h6 mb-3 mt-2" style="height: 18px"></div>
+                            <div class="mb-3">
+                                <div class="w-100 d-flex mb-2 align-items-center">
+                                    <div class="bg-pulse-grey w-25" style="width: 18px; height: 27px"></div>
+                                    <div class="bg-pulse-grey w-50 ml-2" style="height: 18px"></div>
+                                </div>
+                            </div>
+                        </div>                    </div>
+                </div>            </div>
+            <div class="footer-container position-relative" data-region="footer-container">
+                
+                <div class="hidden border-top bg-white position-relative" aria-hidden="true" data-region="view-conversation" data-enter-to-send="0">
+                    <div class="hidden p-sm-2" data-region="content-messages-footer-container">
+                        
+                            <div class="emoji-auto-complete-container w-100 hidden" data-region="emoji-auto-complete-container" aria-live="polite" aria-hidden="true">
+                            </div>
+                        <div class="d-flex mt-sm-1">
+                            <textarea dir="auto" data-region="send-message-txt" class="form-control bg-light" rows="3" data-auto-rows="" data-min-rows="3" data-max-rows="5" aria-label="Écrire un message" placeholder="Écrire un message" style="resize: none"></textarea>
+                        
+                            <div class="position-relative d-flex flex-column">
+                                    <div data-region="emoji-picker-container" class="emoji-picker-container hidden" aria-hidden="true">
+                                        
+                                        <div data-region="emoji-picker" class="card shadow emoji-picker">
+                                            <div class="card-header px-1 pt-1 pb-0 d-flex justify-content-between flex-shrink-0">
+                                                <button class="btn btn-outline-secondary icon-no-margin category-button selected" data-action="show-category" data-category="Recent" title="Récents">
+                                                    <i class="icon fa fa-clock-o fa-fw " aria-hidden="true"></i>
+                                                </button>
+                                                <button class="btn btn-outline-secondary icon-no-margin category-button" data-action="show-category" data-category="Smileys &amp; People" title="Émoticônes &amp; personnes">
+                                                    <i class="icon fa fa-smile-o fa-fw " aria-hidden="true"></i>
+                                                </button>
+                                                <button class="btn btn-outline-secondary icon-no-margin category-button" data-action="show-category" data-category="Animals &amp; Nature" title="Animaux &amp; nature">
+                                                    <i class="icon fa fa-leaf fa-fw " aria-hidden="true"></i>
+                                                </button>
+                                                <button class="btn btn-outline-secondary icon-no-margin category-button" data-action="show-category" data-category="Food &amp; Drink" title="Nourriture &amp; boissons">
+                                                    <i class="icon fa fa-cutlery fa-fw " aria-hidden="true"></i>
+                                                </button>
+                                                <button class="btn btn-outline-secondary icon-no-margin category-button" data-action="show-category" data-category="Travel &amp; Places" title="Voyages &amp; lieux">
+                                                    <i class="icon fa fa-plane fa-fw " aria-hidden="true"></i>
+                                                </button>
+                                                <button class="btn btn-outline-secondary icon-no-margin category-button" data-action="show-category" data-category="Activities" title="Activités">
+                                                    <i class="icon fa fa-futbol-o fa-fw " aria-hidden="true"></i>
+                                                </button>
+                                                <button class="btn btn-outline-secondary icon-no-margin category-button" data-action="show-category" data-category="Objects" title="Objets">
+                                                    <i class="icon fa fa-lightbulb-o fa-fw " aria-hidden="true"></i>
+                                                </button>
+                                                <button class="btn btn-outline-secondary icon-no-margin category-button" data-action="show-category" data-category="Symbols" title="Symboles">
+                                                    <i class="icon fa fa-heart fa-fw " aria-hidden="true"></i>
+                                                </button>
+                                                <button class="btn btn-outline-secondary icon-no-margin category-button" data-action="show-category" data-category="Flags" title="Drapeaux">
+                                                    <i class="icon fa fa-flag fa-fw " aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                            <div class="card-body p-2 d-flex flex-column overflow-hidden">
+                                                <div class="input-group mb-1 flex-shrink-0">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text pr-0 bg-white text-muted">
+                                                            <i class="icon fa fa-search fa-fw " aria-hidden="true"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control border-left-0" placeholder="Rechercher" aria-label="Rechercher" data-region="search-input">
+                                                </div>
+                                                <div class="flex-grow-1 overflow-auto emojis-container h-100" data-region="emojis-container">
+                                                    <div class="position-relative" data-region="row-container"></div>
+                                                </div>
+                                                <div class="flex-grow-1 overflow-auto search-results-container h-100 hidden" data-region="search-results-container">
+                                                    <div class="position-relative" data-region="row-container"></div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer d-flex flex-shrink-0" data-region="footer">
+                                                <div class="emoji-preview" data-region="emoji-preview"></div>
+                                                <div data-region="emoji-short-name" class="emoji-short-name text-muted text-wrap ml-2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-link btn-icon icon-size-3 ml-1" aria-label="Activer/désactiver le sélecteur d&#39;émojis" data-action="toggle-emoji-picker">
+                                        <i class="icon fa fa-smile-o fa-fw " aria-hidden="true"></i>
+                                    </button>
+                                <button class="btn btn-link btn-icon icon-size-3 ml-1 mt-auto" aria-label="Envoyer message personnel" data-action="send-message">
+                                    <span data-region="send-icon-container"><i class="icon fa fa-paper-plane fa-fw " aria-hidden="true"></i></span>
+                                    <span class="hidden" data-region="loading-icon-container"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden p-sm-2" data-region="content-messages-footer-edit-mode-container">
+                        
+                        <div class="d-flex p-3 justify-content-end">
+                            <button class="btn btn-link btn-icon my-1 icon-size-4" data-action="delete-selected-messages" data-toggle="tooltip" data-placement="top" title="Supprimer les messages sélectionnés">
+                                <span data-region="icon-container"><i class="icon fa fa-trash fa-fw " aria-hidden="true"></i></span>
+                                <span class="hidden" data-region="loading-icon-container"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</span>
+                                <span class="sr-only">Supprimer les messages sélectionnés</span>
+                            </button>
+                        </div>                    </div>
+                    <div class="hidden bg-secondary p-sm-3" data-region="content-messages-footer-require-contact-container">
+                        
+                        <div class="p-3 bg-white">
+                            <p data-region="title"></p>
+                            <p class="text-muted" data-region="text"></p>
+                            <button type="button" class="btn btn-primary btn-block" data-action="request-add-contact">
+                                <span data-region="dialogue-button-text">Envoyer une demande de contact</span>
+                                <span class="hidden" data-region="loading-icon-container"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hidden bg-secondary p-sm-3" data-region="content-messages-footer-require-unblock-container">
+                        
+                        <div class="p-3 bg-white">
+                            <p class="text-muted" data-region="text">Vous avez bloqué cet utilisateur.</p>
+                            <button type="button" class="btn btn-primary btn-block" data-action="request-unblock">
+                                <span data-region="dialogue-button-text">Débloquer l'utilisateur</span>
+                                <span class="hidden" data-region="loading-icon-container"><span class="loading-icon icon-no-margin"><i class="icon fa fa-circle-o-notch fa-spin fa-fw " title="Chargement" aria-label="Chargement"></i></span>
+</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hidden bg-secondary p-sm-3" data-region="content-messages-footer-unable-to-message">
+                        
+                        <div class="p-3 bg-white">
+                            <p class="text-muted" data-region="text">Vous ne pouvez pas envoyer un message à cet utilisateur</p>
+                        </div>
+                    </div>
+                    <div class="p-sm-2" data-region="placeholder-container">
+                        <div class="d-flex">
+                            <div class="bg-pulse-grey w-100" style="height: 80px"></div>
+                            <div class="mx-2 mb-2 align-self-end bg-pulse-grey" style="height: 20px; width: 20px"></div>
+                        </div>                    </div>
+                    <div class="hidden position-absolute" data-region="confirm-dialogue-container" style="top: -1px; bottom: 0; right: 0; left: 0; background: rgba(0,0,0,0.3);"></div>
+                </div>                    <div data-region="view-overview" class="text-center">
+                        <a href="https://ametice.univ-amu.fr/message/index.php">
+                            Tout afficher
+                        </a>
+                    </div>
+            </div>
+        </div>
+
+</div>
+<footer id="page-footer" class="d-none d-lg-block">
+
+<div id="course-footer"></div>
+                <div class="container blockplace1"><div class="row"><div class="left-col col-12"><p style="text-align:center;"><a href="http://cipe.univ-amu.fr/" target="_blank" rel="noreferrer noopener"><img src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/CIPECMJNnewmoodle.png" alt="Logo CIPE" width="371" height="57"></a></p></div></div><div class="row"><div class="left-col col-12"><table style="width:100%;" border="0" cellspacing="5" cellpadding="20">
+<tbody>
+<tr>
+<td colspan="5" align="center" valign="top">
+<p style="text-align:center;"><span style="color:#333333;font-family:verdana, arial, helvetica, sans-serif;font-size:small;">Besoin d'une ressource complémentaire pour aider vos apprentissages ?! </span></p>
+<p style="text-align:center;"><span style="font-family:verdana, arial, helvetica, sans-serif;font-size:small;"><span style="color:#333333;">Utilisez le </span><a href="http://www.sup-numerique.gouv.fr/pid33288/moteur-des-ressources-pedagogiques.html" target="_blank" rel="noreferrer noopener">moteur des ressources pédagogiques</a> </span><br><span style="color:#333333;font-family:verdana, arial, helvetica, sans-serif;font-size:small;">ou bien connectez-vous directement à une des Universités Numériques Thématiques (UNT)...</span></p>
+</td>
+</tr>
+<tr>
+<td align="center" valign="middle"><a href="http://www.iutenligne.net/" target="_blank" rel="noreferrer noopener"><img src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/iut1.jpg" alt="Icône IUT en ligne" width="412" height="122"></a></td>
+<td align="center" valign="middle"><a href="https://www.uness.fr/" target="_blank" rel="noreferrer noopener"><img class="img-responsive" style="margin-left:5px;margin-right:5px;margin-top:0px;margin-bottom:0px;" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/WEB_LogoUNESS_3.png" alt="UNESS" width="350" height="207"></a></td>
+<td align="center" valign="middle"><a href="http://www.unisciel.fr/" target="_blank" rel="noreferrer noopener"><img class="img-responsive" style="margin-left:5px;margin-right:5px;margin-top:0px;margin-bottom:0px;" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/logo_unisciel.png" alt="UNISCIEL" width="256" height="71"></a></td>
+<td align="center" valign="middle"><a href="http://www.unjf.fr/" target="_blank" rel="noreferrer noopener"><img class="img-responsive" style="margin-left:5px;margin-right:5px;margin-top:0px;margin-bottom:0px;" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/logo_unjf.jpg" alt="UNJF" width="300" height="81"></a></td>
+<td align="center" valign="middle"><a href="http://www.uoh.fr/" target="_blank" rel="noreferrer noopener"><img class="img-responsive" style="margin-left:5px;margin-right:5px;margin-top:0px;margin-bottom:0px;" src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/logo_uoh.png" alt="UOH" width="191" height="86"></a></td>
+</tr>
+</tbody>
+</table></div></div></div>    <div class="info container2 clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 my-md-0 my-2">
+                    <div class="tool_usertours-resettourcontainer"></div>
+                </div>
+
+                <div class="col-md-4 my-md-0 my-2 helplink">
+                </div>
+                <div class="col-md-4 my-md-0 my-2">
+                    <a href="https://download.moodle.org/mobile?version=2020061501.02&amp;lang=fr&amp;iosappid=633359593&amp;androidappid=com.moodle.moodlemobile">Obtenir l'app mobile</a>                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div id="back-to-top" style="display: block;"><i class="fa fa-angle-up "></i></div>
+
+
+<script>
+//<![CDATA[
+var require = {
+    baseUrl : 'https://ametice.univ-amu.fr/lib/requirejs.php/1595724422/',
+    // We only support AMD modules with an explicit define() statement.
+    enforceDefine: true,
+    skipDataMain: true,
+    waitSeconds : 0,
+
+    paths: {
+        jquery: 'https://ametice.univ-amu.fr/lib/javascript.php/1595724422/lib/jquery/jquery-3.4.1.min',
+        jqueryui: 'https://ametice.univ-amu.fr/lib/javascript.php/1595724422/lib/jquery/ui-1.12.1/jquery-ui.min',
+        jqueryprivate: 'https://ametice.univ-amu.fr/lib/javascript.php/1595724422/lib/requirejs/jquery-private'
+    },
+
+    // Custom jquery config map.
+    map: {
+      // '*' means all modules will get 'jqueryprivate'
+      // for their 'jquery' dependency.
+      '*': { jquery: 'jqueryprivate' },
+      // Stub module for 'process'. This is a workaround for a bug in MathJax (see MDL-60458).
+      '*': { process: 'core/first' },
+
+      // 'jquery-private' wants the real jQuery module
+      // though. If this line was not here, there would
+      // be an unresolvable cyclic dependency.
+      jqueryprivate: { jquery: 'jquery' }
+    }
+};
+
+//]]>
+</script>
+<script src="./[19-20]-S3-M3103-Algo. avancée_ TP 03&amp;04 - Les arbres binaires de recherche_files/javascript(4).php"></script>
+<script>
+//<![CDATA[
+M.util.js_pending("core/first");require(['core/first'], function() {
+require(['core/prefetch']);
+;
+require(["media_videojs/loader"], function(loader) {
+    loader.setUp(function(videojs) {
+        videojs.options.flash.swf = "https://ametice.univ-amu.fr/media/player/videojs/videojs/video-js.swf";
+videojs.addLanguage('fr', {
+  "Audio Player": "Lecteur audio",
+  "Video Player": "Lecteur vidéo",
+  "Play": "Lecture",
+  "Pause": "Pause",
+  "Replay": "Revoir",
+  "Current Time": "Temps actuel",
+  "Duration": "Durée",
+  "Remaining Time": "Temps restant",
+  "Stream Type": "Type de flux",
+  "LIVE": "EN DIRECT",
+  "Loaded": "Chargé",
+  "Progress": "Progression",
+  "Progress Bar": "Barre de progression",
+  "progress bar timing: currentTime={1} duration={2}": "{1} de {2}",
+  "Fullscreen": "Plein écran",
+  "Non-Fullscreen": "Fenêtré",
+  "Mute": "Sourdine",
+  "Unmute": "Son activé",
+  "Playback Rate": "Vitesse de lecture",
+  "Subtitles": "Sous-titres",
+  "subtitles off": "Sous-titres désactivés",
+  "Captions": "Sous-titres transcrits",
+  "captions off": "Sous-titres transcrits désactivés",
+  "Chapters": "Chapitres",
+  "Descriptions": "Descriptions",
+  "descriptions off": "descriptions désactivées",
+  "Audio Track": "Piste audio",
+  "Volume Level": "Niveau de volume",
+  "You aborted the media playback": "Vous avez interrompu la lecture de la vidéo.",
+  "A network error caused the media download to fail part-way.": "Une erreur de réseau a interrompu le téléchargement de la vidéo.",
+  "The media could not be loaded, either because the server or network failed or because the format is not supported.": "Cette vidéo n'a pas pu être chargée, soit parce que le serveur ou le réseau a échoué ou parce que le format n'est pas reconnu.",
+  "The media playback was aborted due to a corruption problem or because the media used features your browser did not support.": "La lecture de la vidéo a été interrompue à cause d'un problème de corruption ou parce que la vidéo utilise des fonctionnalités non prises en charge par votre navigateur.",
+  "No compatible source was found for this media.": "Aucune source compatible n'a été trouvée pour cette vidéo.",
+  "The media is encrypted and we do not have the keys to decrypt it.": "Le média est chiffré et nous n'avons pas les clés pour le déchiffrer.",
+  "Play Video": "Lire la vidéo",
+  "Close": "Fermer",
+  "Close Modal Dialog": "Fermer la boîte de dialogue modale",
+  "Modal Window": "Fenêtre modale",
+  "This is a modal window": "Ceci est une fenêtre modale",
+  "This modal can be closed by pressing the Escape key or activating the close button.": "Ce modal peut être fermé en appuyant sur la touche Échap ou activer le bouton de fermeture.",
+  ", opens captions settings dialog": ", ouvrir les paramètres des sous-titres transcrits",
+  ", opens subtitles settings dialog": ", ouvrir les paramètres des sous-titres",
+  ", opens descriptions settings dialog": ", ouvrir les paramètres des descriptions",
+  ", selected": ", sélectionné",
+  "captions settings": "Paramètres des sous-titres transcrits",
+  "subtitles settings": "Paramètres des sous-titres",
+  "descriptions settings": "Paramètres des descriptions",
+  "Text": "Texte",
+  "White": "Blanc",
+  "Black": "Noir",
+  "Red": "Rouge",
+  "Green": "Vert",
+  "Blue": "Bleu",
+  "Yellow": "Jaune",
+  "Magenta": "Magenta",
+  "Cyan": "Cyan",
+  "Background": "Arrière-plan",
+  "Window": "Fenêtre",
+  "Transparent": "Transparent",
+  "Semi-Transparent": "Semi-transparent",
+  "Opaque": "Opaque",
+  "Font Size": "Taille des caractères",
+  "Text Edge Style": "Style des contours du texte",
+  "None": "Aucun",
+  "Raised": "Élevé",
+  "Depressed": "Enfoncé",
+  "Uniform": "Uniforme",
+  "Dropshadow": "Ombre portée",
+  "Font Family": "Famille de polices",
+  "Proportional Sans-Serif": "Polices à chasse variable sans empattement (Proportional Sans-Serif)",
+  "Monospace Sans-Serif": "Polices à chasse fixe sans empattement (Monospace Sans-Serif)",
+  "Proportional Serif": "Polices à chasse variable avec empattement (Proportional Serif)",
+  "Monospace Serif": "Polices à chasse fixe avec empattement (Monospace Serif)",
+  "Casual": "Manuscrite",
+  "Script": "Scripte",
+  "Small Caps": "Petites capitales",
+  "Reset": "Réinitialiser",
+  "restore all settings to the default values": "Restaurer tous les paramètres aux valeurs par défaut",
+  "Done": "Terminé",
+  "Caption Settings Dialog": "Boîte de dialogue des paramètres des sous-titres transcrits",
+  "Beginning of dialog window. Escape will cancel and close the window.": "Début de la fenêtre de dialogue. La touche d'échappement annulera et fermera la fenêtre.",
+  "End of dialog window.": "Fin de la fenêtre de dialogue."
+});
+
+    });
+});;
+M.util.js_pending('theme_adaptable/adaptable'); require(['theme_adaptable/adaptable'], function(amd) {amd.init(); M.util.js_complete('theme_adaptable/adaptable');});;
+M.util.js_pending('theme_adaptable/bsoptions'); require(['theme_adaptable/bsoptions'], function(amd) {amd.init({"stickynavbar":true}); M.util.js_complete('theme_adaptable/bsoptions');});;
+M.util.js_pending('theme_adaptable/drawer'); require(['theme_adaptable/drawer'], function(amd) {amd.init(); M.util.js_complete('theme_adaptable/drawer');});;
+function legacy_activity_onclick_handler_1(e) { e.halt(); window.open('https://ametice.univ-amu.fr/mod/url/view.php?id=1224310&redirect=1'); return false; };
+function legacy_activity_onclick_handler_2(e) { e.halt(); window.open('https://ametice.univ-amu.fr/mod/url/view.php?id=1224311&redirect=1'); return false; };
+function legacy_activity_onclick_handler_3(e) { e.halt(); window.open('https://ametice.univ-amu.fr/mod/url/view.php?id=1241035&redirect=1'); return false; };
+function legacy_activity_onclick_handler_4(e) { e.halt(); window.open('https://ametice.univ-amu.fr/mod/page/view.php?id=1224313&inpopup=1', '', 'width=800,height=600,toolbar=no,location=no,menubar=no,copyhistory=no,status=no,directories=no,scrollbars=yes,resizable=yes'); return false; };
+function legacy_activity_onclick_handler_5(e) { e.halt(); window.open('https://ametice.univ-amu.fr/mod/resource/view.php?id=1242565&redirect=1', '', 'width=620,height=450,toolbar=no,location=no,menubar=no,copyhistory=no,status=no,directories=no,scrollbars=yes,resizable=yes'); return false; };
+M.util.js_pending('block_settings/settingsblock'); require(['block_settings/settingsblock'], function(amd) {amd.init("5", null); M.util.js_complete('block_settings/settingsblock');});;
+
+    require(['core/yui'], function(Y) {
+            Y.on('click', legacy_activity_onclick_handler_4, '#label_5_38', null);
+    });
+;
+M.util.js_pending('block_navigation/navblock'); require(['block_navigation/navblock'], function(amd) {amd.init("4"); M.util.js_complete('block_navigation/navblock');});;
+
+require(['jquery', 'message_popup/notification_popover_controller'], function($, controller) {
+    var container = $('#nav-notification-popover-container');
+    var controller = new controller(container);
+    controller.registerEventListeners();
+    controller.registerListNavigationEventListeners();
+});
+;
+
+require(
+[
+    'jquery',
+    'core_message/message_popover'
+],
+function(
+    $,
+    Popover
+) {
+    var toggle = $('#message-drawer-toggle-5f1da34e67cd55f1da34e6197316');
+    Popover.init(toggle);
+});
+;
+M.util.js_pending('theme_adaptable/zoomin'); require(['theme_adaptable/zoomin'], function(amd) {amd.init(); M.util.js_complete('theme_adaptable/zoomin');});;
+
+    require(['core/yui'], function(Y) {
+            Y.on('click', legacy_activity_onclick_handler_4, '#label_5_38', null);
+    });
+;
+
+        require(['jquery', 'core/custom_interaction_events'], function($, CustomEvents) {
+            CustomEvents.define('#jump-to-activity', [CustomEvents.events.accessibleChange]);
+            $('#jump-to-activity').on(CustomEvents.events.accessibleChange, function() {
+                if (!$(this).val()) {
+                    return false;
+                }
+                $('#url_select_f5f1da34e6197317').submit();
+            });
+        });
+    ;
+M.util.js_pending('theme_adaptable/showsidebar'); require(['theme_adaptable/showsidebar'], function(amd) {amd.init(); M.util.js_complete('theme_adaptable/showsidebar');});;
+
+require(['jquery', 'core_message/message_drawer'], function($, MessageDrawer) {
+    var root = $('#message-drawer-5f1da34e6b8f65f1da34e6197319');
+    MessageDrawer.init(root, '5f1da34e6b8f65f1da34e6197319', false);
+});
+;
+M.util.js_pending('core/log'); require(['core/log'], function(amd) {amd.setConfig({"level":"warn"}); M.util.js_complete('core/log');});;
+M.util.js_pending('core/page_global'); require(['core/page_global'], function(amd) {amd.init(); M.util.js_complete('core/page_global');});M.util.js_complete("core/first");
+});
+//]]>
+</script>
+<script>
+//<![CDATA[
+M.str = {"moodle":{"lastmodified":"Modifi\u00e9 le","name":"Nom","error":"Erreur","info":"Information","yes":"Oui","no":"Non","ok":"OK","viewallcourses":"Afficher tous les cours","cancel":"Annuler","confirm":"Confirmer","areyousure":"En \u00eates-vous bien s\u00fbr\u00a0?","closebuttontitle":"Fermer","unknownerror":"Erreur inconnue","file":"Fichier","url":"URL"},"repository":{"type":"Type","size":"Taille","invalidjson":"Cha\u00eene JSON non valide","nofilesattached":"Aucun fichier joint","filepicker":"S\u00e9lecteur de fichiers","logout":"D\u00e9connexion","nofilesavailable":"Aucun fichier disponible","norepositoriesavailable":"D\u00e9sol\u00e9, aucun de vos d\u00e9p\u00f4ts actuels ne peut retourner de fichiers dans le format requis.","fileexistsdialogheader":"Le fichier existe","fileexistsdialog_editor":"Un fichier de ce nom a d\u00e9j\u00e0 \u00e9t\u00e9 joint au texte que vous modifiez.","fileexistsdialog_filemanager":"Un fichier de ce nom a d\u00e9j\u00e0 \u00e9t\u00e9 joint","renameto":"Renommer \u00e0 \u00ab\u00a0{$a}\u00a0\u00bb","referencesexist":"Ce fichier est utilis\u00e9 comme source par {$a} alias.","select":"S\u00e9lectionnez"},"admin":{"confirmdeletecomments":"Voulez-vous vraiment supprimer des commentaires\u00a0?","confirmation":"Confirmation"},"debug":{"debuginfo":"Info de d\u00e9bogage","line":"Ligne","stacktrace":"Trace de la pile"},"langconfig":{"labelsep":"&nbsp;"}};
+//]]>
+</script>
+<script>
+//<![CDATA[
+(function() {Y.use("moodle-filter_mathjaxloader-loader",function() {M.filter_mathjaxloader.configure({"mathjaxconfig":"\nMathJax.Hub.Config({\n    config: [\"Accessible.js\", \"Safe.js\"],\n    errorSettings: { message: [\"!\"] },\n    skipStartupTypeset: true,\n    messageStyle: \"none\"\n});\n","lang":"fr"});
+});
+Y.use("moodle-filter_glossary-autolinker",function() {M.filter_glossary.init_filter_autolinking({"courseid":0});
+});
+M.util.help_popups.setup(Y);
+M.util.init_block_hider(Y, {"id":"inst4","title":"Navigation","preference":"block4hidden","tooltipVisible":"Cacher le bloc Navigation","tooltipHidden":"Montrer le bloc Navigation"});
+ M.util.js_pending('random5f1da34e6197320'); Y.on('domready', function() { M.util.js_complete("init");  M.util.js_complete('random5f1da34e6197320'); });
+})();
+//]]>
+</script>
+
+</div>
+
+
+
+
+</body></html>
