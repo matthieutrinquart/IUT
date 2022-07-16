@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+	<head>
+	  <meta charset="utf-8">
+	  <title>[Histoire]</title>
+	  <link id="css" rel="stylesheet" type="text/css" href="Styles/style_day.css"/>
+	  <link rel="icon" href="Pictures/head_icon.svg"/>
+	  <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+	  <meta name="description" content="Explications et réflexions sur les objets connectés"/>
+	  <meta name="author" content="Michael CADOUL / Mathieu TRINQUART / Milan VERY-GRIETTE" />
+	</head>
+
+	<body> 
+
+		<header>
+			<h1>Les Objets Connectés</h1>
+		</header>
+
+		<nav>
+			<div id="first" class="nav" onclick="window.location.href='index.html'"><img src="Pictures/home_icon.svg"></div>
+				
+				<div class="navbutton">
+					
+					<div id="container">
+		    			
+		    			<div class="inner-container">
+						    
+						    <div class="toggle">
+						        <p>Nuit</p>
+						    </div>
+						    
+						    <div class="toggle">
+						        <p>Jour</p>
+						    </div>
+						    
+						</div>
+						   	
+						<div class="inner-container" id='toggle-container'>
+						        
+						    <div class="toggle">
+						        <p>Nuit</p>
+						    </div>
+
+						    <div class="toggle">
+						        <p>Jour</p>
+						    </div>
+						</div>
+					</div>
+			</div>
+				
+			<div class="nav" onclick="window.location.href='def.html'"><p>Definition</p></div>
+
+			<div class="nav" onclick="window.location.href='histoire.html'"><p>Histoire</p></div>
+
+			<div class="nav" onclick="window.location.href='futur.html'"><p>Futur</p></div>
+
+			<div class="nav" onclick="window.location.href='reflexions.html'"><p>Réflexions</p></div>
+
+			<div class="nav" onclick="window.location.href='contact.html'"><p>Contact</p></div>
+		</nav>
+
+
+		<section>
+
+			<article>
+	 		<h3 class="articletitle">Les grandes entreprises</h3>
+
+	 		<p class="articlesubtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+			<p class="articlecontent">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	</article>
+
+	<article>
+	 		<h3 class="articletitle">En France</h3>
+
+	 		<p class="articlesubtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+			<p class="articlecontent">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	</article>
+</section>
+
+		</section>
+
+
+		<footer>
+			<div>
+				&copy; 2018 Les Objets Connectés
+			</div>
+		</footer>
+
+
+		<script type="text/javascript">
+		var toggle = document.getElementById('container');
+		var toggleContainer = document.getElementById('toggle-container');
+		var toggleNumber;
+
+		toggle.addEventListener('click', function() {
+		    toggleNumber = !toggleNumber;
+		    if (toggleNumber) {
+		        toggleContainer.style.clipPath = 'inset(0 0 0 50%)';
+		        toggleContainer.style.backgroundColor = '#7a0000';
+		         document.getElementById('css').href='Styles/style_night.css';
+		    } else {
+		        toggleContainer.style.clipPath = 'inset(0 50% 0 0)';
+		        toggleContainer.style.backgroundColor = '#03a4ba';
+		        document.getElementById('css').href='Styles/style_day.css';
+		    }
+		    console.log(toggleNumber)
+		});
+		</script>
+
+	</body>
+
+</html>

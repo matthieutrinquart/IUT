@@ -1,0 +1,3 @@
+Pour compiler et executer:
+g++ -Wall *.cpp -lGL -lGLU -lglut -lGLEW -o TP4
+./TP4

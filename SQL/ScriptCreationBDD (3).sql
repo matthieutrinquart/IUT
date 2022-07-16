@@ -1,0 +1,65 @@
+
+
+-- Nom de la base : PROJET_STAGE
+-- Nom de l'admin : ADMIN
+-- MDP De l'admin : SJzEeqLb2HHeNYVV
+
+-- Apparement les enum n'existent pas sous MySQL
+-- CREATE TYPE statut AS ENUM ('Admin', 'Entreprise', 'Membre');
+
+-- Trigger pour verifier l'insertion dans offre 
+CREATE TABLE IF NOT EXISTS `T_USER` 
+(
+	ID_USER INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	NOM varchar(255) NOT NULL,
+	PRENOM varchar(255) NOT NULL,
+	MAIL varchar(255) NOT NULL,
+	MDP varchar(255) NOT NULL,
+	TELEPHONE varchar(255) ,
+	-- Ici j'aurais mis aussi le telephone vu qu'il apparait dans ENtreprise et Memebre
+	USER_STATUT varchar(255) NOT NULL,
+	
+	-- ID_ENTREPRISE INT PRIMARY KEY NOT NULL AUTO_INCREMENT ,
+	RAISON_SOCIALE varchar(255) default NULL,
+	IS_ACTIV BOOLEAN default null,
+	
+	-- ID_MEMBRE INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	DATE_NAISS DATE default null,
+	DIPLOME varchar(255) default null
+);
+
+CREATE TABLE IF NOT EXISTS `T_OFFRE` 
+(
+	ID_OFFRE INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	ID_ENTREPRISE INT NOT NULL,
+	TITRE varchar(255) NOT NULL,
+	DATE_DEBUT DATE,
+	DUREE varchar(255) NOT NULL,
+	MISSION varchar(255) NOT NULL,
+	CONTACT varchar(255) NOT NULL,
+	PJ varchar(255),
+	COMPLEMENT_INFO varchar(255),
+	
+	constraint FK_OFFRE_ENTREPRISE foreign key(ID_ENTREPRISE) references T_USER (ID_USER) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS `T_COMMENTAIRE` 
+(
+    ID_COMMENTAIRE INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    ID_OFFRE INT NOT NULL,
+	ID_USER INT NOT NULL,
+	TEXTE varchar(1000),
+	constraint FK_COMMENTAIRE_OFFRE foreign key(ID_OFFRE) references T_OFFRE (ID_OFFRE) ON DELETE CASCADE,
+	constraint FK_COMMENTAIRE_USER foreign key(ID_USER) references T_USER (ID_USER) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS `T_LIKES` 
+(
+	ID_OFFRE INT NOT NULL,
+	ID_USER INT NOT NULL,
+	constraint PK_T_LIKES primary key (ID_OFFRE, ID_USER),
+	constraint FK_LIKES_OFFRE foreign key(ID_OFFRE) references T_OFFRE (ID_OFFRE) ON DELETE CASCADE,
+	constraint FK_LIKES_USER foreign key(ID_USER) references T_USER (ID_USER) ON DELETE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+INSERT INTO `T_USER` (`ID_USER`, `NOM`, `PRENOM`, `MAIL`, `MDP`, `TELEPHONE`, `USER_STATUT`, `RAISON_SOCIALE`, `IS_ACTIV`, `DATE_NAISS`, `DIPLOME`) VALUES (NULL, 'ADMIN', 'ADMIN', 'matthieu.trinquart@etu.univ-amu.fr', 'd11afb82d067ab640729c7b61b8aa3b70f39490d', NULL, 'ADMIN', NULL, NULL, NULL, NULL);
