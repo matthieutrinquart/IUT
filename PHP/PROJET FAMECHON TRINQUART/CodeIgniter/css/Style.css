@@ -1,0 +1,98 @@
+#menu li
+{
+	display: inline-block;
+	margin-right: 1px;
+	background: #e05555;
+	min-width:200px;
+	max-width:400px;
+}
+
+#menu 
+{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-align: center;
+}
+
+#menu li a{
+	display: inline-block;
+	width : 250px;
+	height : 50px;
+	color: white;
+	border: 1px solid black;
+	font: 1em Arial, sans-serif;
+	line-height: 40px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.offre
+{
+	width: 50%;
+	min-width:200px;
+	margin: 0 auto;
+	margin-top:10px;
+	margin-bottom:10px;
+	border: solid;
+	border-width:2px;
+}
+
+.main
+{
+	margin: 0 auto;
+	min-width: 200px;
+	max-width: 400px;
+	resize:vertical;
+}
+
+#formulaire
+{
+	/* resize: vertical; */
+}
+
+input
+{
+	/* width: 80%; */
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #e05555;
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.page
+{
+	margin-bottom: 70px;
+}
+
+.UserInfo
+{
+	text-align: center;
+}
+
+.droite
+{
+	text-align: right;
+}
+
+#enligne
+{
+	display: inline;
+}
+
+.commentaire
+{
+	margin: auto;
+	width: 65%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	text-align: center;
+	border: dashed red;
+}

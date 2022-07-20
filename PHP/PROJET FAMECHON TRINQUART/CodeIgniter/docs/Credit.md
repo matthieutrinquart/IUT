@@ -1,0 +1,1 @@
+Le site et la documentation a été fait par le groupe 7 composé de FAMECHON Hugo et TRINQUART Matthieu

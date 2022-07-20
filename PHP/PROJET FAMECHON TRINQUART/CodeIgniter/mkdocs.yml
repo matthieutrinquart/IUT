@@ -1,0 +1,19 @@
+site_name: DOCUMENTATION FAMECHON | TRINQUART
+nav:
+    - Introduction: index.md
+    - 'Installation': Installation.md
+    - Description: 
+        - 'Fonctionnalitées': descriptionFonctionnalitees.md
+        - 'Fonctionnement': descriptionFonctionnement.md
+    - Diagrammes et script: Diagramme.md
+    - Controllers:
+        - 'Stage': Stage.md
+        - 'Inscription': Inscription.md
+        - 'Connexion': Connexion.md
+        - 'Offres': Offres.md
+        - 'Profile': Profile.md
+        - 'Voir_user_Admin': Voir_user_Admin.md
+    - Modele: Modele.md
+    - Vues: Vues.md
+    - Crédits: Credit.md
+theme: readthedocs
