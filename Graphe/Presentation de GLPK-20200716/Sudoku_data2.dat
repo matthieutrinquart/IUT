@@ -1,0 +1,33 @@
+# données du sudoku
+param n_fix:=24; # nombre de cases fixées
+
+# T contient les cases de la grille dans lesquelles on a déjà mis un  chifre de 1 à 9
+# par ligne, on a i j k avec i=n° ligne, j=n° colonne, k=nombre dans la case i,j
+param T: 1 2 3 :=
+1  1 1 7
+2  1 7 4
+3  2 2 2
+4  2 5 7
+5  2 8 8
+6  3 3 3
+7  3 6 8
+8  3 9 9
+9  4 4 5
+10 4 7 3
+11 5 2 6
+12 5 5 2
+13 5 8 9
+14 6 3 1
+15 6 6 7
+16 6 9 6
+17 7 4 3
+18 7 7 9
+19 8 2 3
+20 8 5 4
+21 8 8 6
+22 9 3 9
+23 9 6 1
+24 9 9 5
+;
+
+
