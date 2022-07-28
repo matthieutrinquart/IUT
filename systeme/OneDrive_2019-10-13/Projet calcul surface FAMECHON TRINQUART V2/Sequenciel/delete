@@ -1,5 +1,0 @@
-rm iFaceTri.o
-rm lecturefichierOFF
-rm objetsOFF.o
-rm point3.o
-rm vector3.o
